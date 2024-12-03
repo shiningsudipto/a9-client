@@ -1,11 +1,27 @@
 import { Button } from "@material-tailwind/react";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikValues } from "formik";
 import FormikInput from "../../components/formik/FormikInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../redux/features/auth";
+import { TResponse } from "../../types";
+import { toast } from "sonner";
 
 const Login = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+  const handleSubmit = async (values: FormikValues) => {
+    const toastId = toast.loading("Login processing!");
+    try {
+      const res = (await login(values).unwrap()) as TResponse;
+      console.log({ res });
+      if (res.success) {
+        toast.success(res.message, { id: toastId, duration: 2000 });
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+    }
   };
   return (
     <div>
