@@ -6,12 +6,14 @@ import router from "./routes/router";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ThemeProvider } from "@material-tailwind/react";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <ThemeProvider>
         <RouterProvider router={router} />
+        <Toaster />
       </ThemeProvider>
     </Provider>
   </StrictMode>

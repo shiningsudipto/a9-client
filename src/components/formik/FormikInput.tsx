@@ -20,6 +20,7 @@ const FormikInput = ({
         {({ field }: FieldProps) => (
           <>
             <Input
+              className="px-3"
               {...field}
               type={type}
               variant="standard"
