@@ -7,13 +7,13 @@ import {
   IconButton,
   List,
   ListItem,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
+  // Menu,
+  // MenuHandler,
+  // MenuList,
+  // MenuItem,
 } from "@material-tailwind/react";
 import {
-  ChevronDownIcon,
+  // ChevronDownIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -22,88 +22,41 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setUser, useCurrentUser } from "../../redux/slices/auth";
-function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  return (
-    <React.Fragment>
-      <Menu
-        open={isMenuOpen}
-        handler={setIsMenuOpen}
-        placement="bottom"
-        allowHover={true}
-      >
-        <MenuHandler>
-          <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-black"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              Blocks
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler>
-        <MenuList className="hidden rounded-xl lg:block">
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </MenuList>
-      </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </Collapse>
-      </div>
-    </React.Fragment>
-  );
-}
+const menuLinks = [
+  {
+    path: "/",
+    name: "Home",
+  },
+  {
+    path: "/",
+    name: "Shop",
+  },
+  {
+    path: "/",
+    name: "Account",
+  },
+];
+
 function NavList() {
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="black"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Pages</ListItem>
-      </Typography>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="black"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Account
-        </ListItem>
-      </Typography>
-      <NavListMenu />
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="black"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Docs</ListItem>
-      </Typography>
+      {menuLinks?.map((item, index) => {
+        return (
+          <Typography
+            key={index}
+            as="a"
+            href={item.path}
+            variant="paragraph"
+            color="white"
+            className="font-medium"
+          >
+            <ListItem className="flex items-center gap-2 py-2 pr-4">
+              {item.name}
+            </ListItem>
+          </Typography>
+        );
+      })}
     </List>
   );
 }
@@ -124,8 +77,11 @@ const CustomNavbar = () => {
     );
   }, []);
   return (
-    <Navbar className="max-w-full px-4 py-1 bg-primary text-black rounded-none shadow-none border border-b-gray-400 ">
-      <div className="flex items-center justify-between text-black">
+    <Navbar className="max-w-full px-4 py-1 bg-primary text-white rounded-none shadow-none border-none">
+      <div className="flex items-center justify-between text-white">
+        <Link to="/" className="text-xl font-semibold">
+          Electro Hub
+        </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
@@ -134,19 +90,19 @@ const CustomNavbar = () => {
             <Button
               onClick={handleLogout}
               variant="outlined"
-              color="black"
+              color="white"
               size="sm"
             >
               Logout
             </Button>
           ) : (
             <Link to="/login">
-              <Button variant="outlined" color="black" size="sm">
+              <Button variant="outlined" color="white" size="sm">
                 Log In
               </Button>
             </Link>
           )}
-          <Button className="text-black text-2xl bg-transparent shadow-none hover:shadow-none">
+          <Button className="text-white text-2xl bg-transparent shadow-none hover:shadow-none">
             <HiOutlineShoppingCart />
           </Button>
         </div>

@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import CustomNavbar from "./components/shared/CustomNavbar";
 import { useAppSelector } from "./redux/hooks";
 import { useCurrentUser } from "./redux/slices/auth";
@@ -8,7 +9,7 @@ const App = () => {
   return (
     <div>
       <CustomNavbar />
-      <p>Hello, App!</p>
+      <Outlet />
     </div>
   );
 };
