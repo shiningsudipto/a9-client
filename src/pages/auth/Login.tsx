@@ -5,10 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../redux/features/auth";
 import { TResponse } from "../../types";
 import { toast } from "sonner";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUser, TUser } from "../../redux/slices/auth";
+import { verifyToken } from "../../utils/verifyToken";
 
 const Login = () => {
   const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = async (values: FormikValues) => {
     const toastId = toast.loading("Login processing!");
     try {
@@ -16,6 +21,8 @@ const Login = () => {
       console.log({ res });
       if (res.success) {
         toast.success(res.message, { id: toastId, duration: 2000 });
+        const user = verifyToken(res.data.token) as TUser;
+        dispatch(setUser({ user: user, token: res.data.token }));
         navigate("/");
       }
     } catch (error) {
@@ -25,7 +32,10 @@ const Login = () => {
   };
   return (
     <div>
-      <Formik initialValues={{ password: "" }} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={{ email: "user@e.com", password: "123456" }}
+        onSubmit={handleSubmit}
+      >
         <Form className="flex items-center justify-center h-[100vh] border bg-gray-100">
           <div className="w-[450px] rounded-md p-10 mx-auto bg-white shadow-md">
             <h3 className="text-center text-3xl font-bold mb-8">Login</h3>

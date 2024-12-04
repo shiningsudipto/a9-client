@@ -20,6 +20,8 @@ import {
 
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setUser, useCurrentUser } from "../../redux/slices/auth";
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -108,6 +110,12 @@ function NavList() {
 
 const CustomNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
+  const user = useAppSelector(useCurrentUser);
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(setUser({ user: null, token: null }));
+  };
 
   useEffect(() => {
     window.addEventListener(
@@ -122,11 +130,22 @@ const CustomNavbar = () => {
           <NavList />
         </div>
         <div className="hidden gap-2 lg:flex items-center">
-          <Link to="/login">
-            <Button variant="outlined" color="black" size="sm">
-              Log In
+          {user ? (
+            <Button
+              onClick={handleLogout}
+              variant="outlined"
+              color="black"
+              size="sm"
+            >
+              Logout
             </Button>
-          </Link>
+          ) : (
+            <Link to="/login">
+              <Button variant="outlined" color="black" size="sm">
+                Log In
+              </Button>
+            </Link>
+          )}
           <Button className="text-black text-2xl bg-transparent shadow-none hover:shadow-none">
             <HiOutlineShoppingCart />
           </Button>
