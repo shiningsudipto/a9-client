@@ -29,11 +29,11 @@ const menuLinks = [
     name: "Home",
   },
   {
-    path: "/",
-    name: "Shop",
+    path: "/products",
+    name: "Products",
   },
   {
-    path: "/",
+    path: "/vendor/account",
     name: "Account",
   },
 ];

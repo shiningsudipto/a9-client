@@ -3,6 +3,9 @@ import App from "../App";
 import Login from "../pages/auth/Login";
 import Registration from "../pages/auth/Registration";
 import Home from "../pages/home/Home";
+import AccountLayout from "../components/layouts/AccountLayout";
+import Shop from "../pages/shop/Shop";
+import Account from "../pages/account/Account";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +15,20 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "vendor",
+    element: <AccountLayout />,
+    children: [
+      {
+        path: "account",
+        element: <Account />,
+      },
+      {
+        path: "shop",
+        element: <Shop />,
       },
     ],
   },

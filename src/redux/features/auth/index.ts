@@ -33,6 +33,9 @@ const authApi = baseApi.injectEndpoints({
     getAllUsers: builder.query({
       query: () => `/user/all`,
     }),
+    getUserById: builder.query({
+      query: (id) => `/user/${id}`,
+    }),
   }),
 });
 
@@ -42,4 +45,5 @@ export const {
   useUpdateUserMutation,
   useDeleteUserMutation,
   useGetAllUsersQuery,
+  useGetUserByIdQuery,
 } = authApi;
