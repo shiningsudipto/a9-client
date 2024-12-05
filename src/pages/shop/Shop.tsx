@@ -9,6 +9,7 @@ import HandleShop from "./components/HandleShop";
 import { TResponse } from "../../types";
 import { toast } from "sonner";
 import { FaRegEdit } from "react-icons/fa";
+import ProductTable from "./components/ProductTable";
 
 const initialValues = {
   name: "",
@@ -77,6 +78,16 @@ const Shop = () => {
                 Edit
               </button>
             </div>
+          </div>
+          <div className="bg-white m-10 rounded-md p-5">
+            {/* {shopData?.Product?.map((item) => {
+              return (
+                <div key={item.id}>
+                  <p>{item?.name}</p>
+                </div>
+              );
+            })} */}
+            <ProductTable TABLE_ROWS={shopData?.Product} />
           </div>
         </div>
       )}

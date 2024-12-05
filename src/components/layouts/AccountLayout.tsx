@@ -26,15 +26,15 @@ const AccountLayout = () => {
       name: "Shop",
     },
     {
-      path: "products",
-      name: "Products",
+      path: "/",
+      name: "Home",
     },
   ];
 
   return (
     <div className="">
-      <CustomNavbar />
-      <div className="flex">
+      {/* <CustomNavbar /> */}
+      <div className="flex fixed top-0 w-full">
         {/* drawer */}
         <Button onClick={openDrawer} className="lg:hidden block">
           <FiMenu />
@@ -72,7 +72,7 @@ const AccountLayout = () => {
             );
           })}
         </div>
-        <div className="w-full bg-gray-400">
+        <div className="w-full bg-gray-400 max-h-screen overflow-y-scroll">
           <Outlet />
         </div>
       </div>
