@@ -26,7 +26,7 @@ const AccountLayout = () => {
       name: "Shop",
     },
     {
-      path: "/products",
+      path: "products",
       name: "Products",
     },
   ];
@@ -72,7 +72,7 @@ const AccountLayout = () => {
             );
           })}
         </div>
-        <div className="w-full ">
+        <div className="w-full bg-gray-400">
           <Outlet />
         </div>
       </div>

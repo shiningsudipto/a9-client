@@ -35,10 +35,10 @@ export default withMT({
         // dark to light
         gray: {
           DEFAULT: "#808080",
-          200: "#A9A9A9",
-          300: "#BEBEBE",
-          400: "#C0C0C0",
-          500: "#D3D3D3",
+          100: "#A9A9A9",
+          200: "#BEBEBE",
+          300: "#C0C0C0",
+          400: "#D3D3D3",
         },
       },
     },

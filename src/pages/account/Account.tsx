@@ -7,8 +7,8 @@ const Account = () => {
   const { data } = useGetUserByIdQuery(user.id);
   const userData = data?.data;
   return (
-    <div className="bg-gray-500 min-h-screen flex justify-center items-center">
-      <div className="w-[500px] p-5 bg-white rounded-md mx-auto">
+    <div className="">
+      <div className="w-[500px] p-5 bg-white rounded-md mx-auto mt-10">
         <div className="flex flex-col items-center space-y-2">
           <img
             src={userData?.avatar}
