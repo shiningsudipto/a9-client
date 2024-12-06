@@ -10,6 +10,7 @@ import { TResponse } from "../../types";
 import { toast } from "sonner";
 import { FaRegEdit } from "react-icons/fa";
 import ProductTable from "./components/ProductTable";
+import CreateProduct from "./components/CreateProduct";
 
 const initialValues = {
   name: "",
@@ -20,6 +21,7 @@ const initialValues = {
 const Shop = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
   const { data, error } = useGetShopByVendorQuery(user.id);
+
   console.log(data, error);
   const shopData = data?.data;
   const [createShop] = useCreateShopMutation();
@@ -80,13 +82,9 @@ const Shop = () => {
             </div>
           </div>
           <div className="bg-white m-10 rounded-md p-5">
-            {/* {shopData?.Product?.map((item) => {
-              return (
-                <div key={item.id}>
-                  <p>{item?.name}</p>
-                </div>
-              );
-            })} */}
+            <div className="flex justify-end me-10">
+              <CreateProduct />
+            </div>
             <ProductTable TABLE_ROWS={shopData?.Product} />
           </div>
         </div>

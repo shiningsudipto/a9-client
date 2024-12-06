@@ -18,6 +18,14 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Product", "Shop"],
     }),
+    createProduct: builder.mutation({
+      query: (productData) => ({
+        url: "/product",
+        method: "POST",
+        body: productData,
+      }),
+      invalidatesTags: ["Product", "Shop"],
+    }),
     getShopByVendor: builder.query({
       query: (id) => `/shop/${id}`,
       providesTags: ["Product"],
@@ -26,6 +34,7 @@ const productApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useCreateProductMutation,
   useGetShopByVendorQuery,
   useDeleteProductMutation,
   useUpdateProductMutation,

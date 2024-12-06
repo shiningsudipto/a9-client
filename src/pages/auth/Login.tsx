@@ -33,7 +33,10 @@ const Login = () => {
   return (
     <div>
       <Formik
-        initialValues={{ email: "user@e.com", password: "123456" }}
+        initialValues={{
+          email: "johndoe@example.com",
+          password: "hashedpassword123",
+        }}
         onSubmit={handleSubmit}
       >
         <Form className="flex items-center justify-center h-[100vh] border bg-gray-100">

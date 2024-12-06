@@ -1,6 +1,7 @@
 import { Option, Select } from "@material-tailwind/react";
 import { ErrorMessage, Field, FieldProps } from "formik";
-interface Option {
+
+export interface TDropdownOption {
   value: string;
   label: string;
 }
@@ -8,19 +9,26 @@ interface Option {
 interface InputProps {
   name: string;
   label?: string;
-  options?: Option[];
+  options?: TDropdownOption[];
 }
 
 const FormikDropdown = ({ name, label, options }: InputProps) => {
   return (
     <div>
       <Field name={name}>
-        {({ field }: FieldProps) => (
+        {({ field, form }: FieldProps) => (
           <>
-            <Select {...field} variant="standard" label={label}>
-              {options?.map((item: Option) => {
-                return <Option key={item.value}>{item.label}</Option>;
-              })}
+            <Select
+              variant="standard"
+              label={label}
+              value={field.value}
+              onChange={(e) => form.setFieldValue(name, e)}
+            >
+              {options?.map((item: TDropdownOption) => (
+                <Option key={item.value} value={item.value}>
+                  {item.label}
+                </Option>
+              ))}
             </Select>
           </>
         )}
