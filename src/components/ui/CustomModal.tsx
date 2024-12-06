@@ -14,6 +14,7 @@ interface CustomModalProps {
   open: boolean;
   header?: boolean;
   footer?: boolean;
+  scroll?: boolean;
   children: ReactNode;
 }
 
@@ -23,6 +24,7 @@ const CustomModal: FC<CustomModalProps> = ({
   setOpen,
   header = false,
   footer = false,
+  scroll = false,
   onClick,
   children,
 }) => {
@@ -32,7 +34,9 @@ const CustomModal: FC<CustomModalProps> = ({
     <div>
       <Dialog open={open} handler={handleOpen}>
         {header && <DialogHeader>{title}</DialogHeader>}
-        <DialogBody>{children}</DialogBody>
+        <DialogBody className={`${scroll && "max-h-[95vh] overflow-y-scroll"}`}>
+          {children}
+        </DialogBody>
         {footer && (
           <DialogFooter>
             <Button

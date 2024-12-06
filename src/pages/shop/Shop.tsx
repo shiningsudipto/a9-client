@@ -83,7 +83,7 @@ const Shop = () => {
           </div>
           <div className="bg-white m-10 rounded-md p-5">
             <div className="flex justify-end me-10">
-              <CreateProduct />
+              <CreateProduct shopId={shopData?.id} />
             </div>
             <ProductTable TABLE_ROWS={shopData?.Product} />
           </div>
