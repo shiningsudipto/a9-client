@@ -19,6 +19,7 @@ const ProductTable = ({ TABLE_ROWS }) => {
   const [deleteProduct] = useDeleteProductMutation();
   const [updateProduct] = useUpdateProductMutation();
   const handleProductDelete = async (id: string) => {
+    console.log(id);
     const toastId = toast.loading("Product deleting please wait!");
     const res = (await deleteProduct({ id: id }).unwrap()) as TResponse;
     toast.success(res.message, { id: toastId, duration: 2000 });
@@ -108,7 +109,7 @@ const ProductTable = ({ TABLE_ROWS }) => {
                       >
                         Edit
                       </button>
-                      <button onClick={() => handleProductDelete(id)}>
+                      <button onClick={() => handleProductDelete(item?.id)}>
                         Delete
                       </button>
                     </div>
@@ -130,7 +131,7 @@ const ProductTable = ({ TABLE_ROWS }) => {
           {({ setFieldValue, values }) => {
             return (
               <Form className="">
-                <div className="p-10 bg-white">
+                <div className=" bg-white">
                   <h3 className="text-center text-3xl font-bold mb-8">
                     Edit Product
                   </h3>

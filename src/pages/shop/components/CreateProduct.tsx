@@ -62,7 +62,7 @@ const CreateProduct = ({ shopId }: { shopId: string }) => {
           {({ setFieldValue, values }) => {
             return (
               <Form className="">
-                <div className="p-5 bg-white">
+                <div className=" bg-white">
                   <h3 className="text-center text-3xl font-bold mb-5">
                     Create Product
                   </h3>

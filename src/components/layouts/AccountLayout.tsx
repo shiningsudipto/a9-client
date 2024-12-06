@@ -8,8 +8,7 @@ import {
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FiMenu } from "react-icons/fi";
-import CustomNavbar from "../shared/CustomNavbar";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 const AccountLayout = () => {
   const [open, setOpen] = useState(false);
 
@@ -26,6 +25,10 @@ const AccountLayout = () => {
       name: "Shop",
     },
     {
+      path: "orders",
+      name: "Orders",
+    },
+    {
       path: "/",
       name: "Home",
     },
@@ -33,7 +36,6 @@ const AccountLayout = () => {
 
   return (
     <div className="">
-      {/* <CustomNavbar /> */}
       <div className="flex fixed top-0 w-full">
         {/* drawer */}
         <Button onClick={openDrawer} className="lg:hidden block">
@@ -57,18 +59,11 @@ const AccountLayout = () => {
         <div className="w-[250px] h-screen bg-secondary-500 p-5">
           {menuLinks?.map((item, index) => {
             return (
-              <Typography
-                key={index}
-                as="a"
-                href={item.path}
-                variant="paragraph"
-                color="white"
-                className="font-medium"
-              >
-                <ListItem className="flex items-center gap-2 py-2 pr-4">
+              <Link to={item.path}>
+                <ListItem className="flex items-center gap-2 py-2 pr-4 text-white">
                   {item.name}
                 </ListItem>
-              </Typography>
+              </Link>
             );
           })}
         </div>

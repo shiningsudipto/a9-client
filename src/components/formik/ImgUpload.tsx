@@ -25,6 +25,13 @@ const ImgUpload = ({
     }
   };
 
+  const currentFile =
+    typeof values[name] === "string"
+      ? "Upload another"
+      : multiple
+      ? `${values[name]?.length || 0} file(s) selected`
+      : values[name]?.name || "";
+
   return (
     <div>
       <div className="flex items-stretch">
@@ -40,11 +47,7 @@ const ImgUpload = ({
         <input
           type="text"
           className="border-b border-gray-400 w-full px-3 focus-visible:outline-none focus-visible:border-b-2 focus-visible:border-black"
-          value={
-            multiple
-              ? `${values?.[name]?.length || 0} file(s) selected`
-              : values?.[name]?.name || ""
-          }
+          value={currentFile}
         />
 
         {/* Hidden File Input */}

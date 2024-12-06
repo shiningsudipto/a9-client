@@ -33,8 +33,10 @@ const CustomModal: FC<CustomModalProps> = ({
   return (
     <div>
       <Dialog open={open} handler={handleOpen}>
-        {header && <DialogHeader>{title}</DialogHeader>}
-        <DialogBody className={`${scroll && "max-h-[95vh] overflow-y-scroll"}`}>
+        {header && <DialogHeader className="px-5">{title}</DialogHeader>}
+        <DialogBody
+          className={`${scroll && "max-h-[95vh] overflow-y-scroll"} p-5`}
+        >
           {children}
         </DialogBody>
         {footer && (

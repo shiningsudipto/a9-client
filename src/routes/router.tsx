@@ -6,7 +6,7 @@ import Home from "../pages/home/Home";
 import AccountLayout from "../components/layouts/AccountLayout";
 import Shop from "../pages/shop/Shop";
 import Account from "../pages/account/Account";
-import Products from "../pages/vendor/products/Products";
+import Orders from "../pages/vendor/orders/Orders";
 
 const router = createBrowserRouter([
   {
@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: "products",
-        element: <Products />,
+        path: "orders",
+        element: <Orders />,
       },
     ],
   },
