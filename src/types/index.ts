@@ -30,6 +30,18 @@ export interface TDBUser {
   updatedAt: string;
 }
 
+export interface TProduct {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  stock: number;
+  category: string;
+  flashSale: boolean;
+  images: string[];
+  shopId: string;
+}
+
 export interface TShop {
   id: string;
   name: string;

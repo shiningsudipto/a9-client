@@ -94,7 +94,7 @@ const Shop = () => {
           handleShopData={handleCreateShop}
         />
       ) : (
-        <div className="">
+        <div>
           <div>
             <div className="w-[500px] p-5 bg-white rounded-md mx-auto relative mt-10">
               <div className="flex flex-col items-center space-y-2">
@@ -122,12 +122,12 @@ const Shop = () => {
               </button>
             </div>
           </div>
-          <div className="bg-white m-10 rounded-md p-5">
-            <div className="flex justify-end me-10">
+          <div className="flex justify-end mt-5">
+            <div className=" me-10 bg-white w-fit px-10 py-4">
               <CreateProduct shopId={shopData?.id} />
             </div>
-            <ProductTable TABLE_ROWS={shopData?.Product} />
           </div>
+          <ProductTable TABLE_ROWS={shopData?.Product} />
         </div>
       )}
       <CustomModal

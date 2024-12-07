@@ -1,9 +1,9 @@
-import { Card, Typography } from "@material-tailwind/react";
 import {
   useDeleteProductMutation,
+  useDuplicateProductMutation,
   useUpdateProductMutation,
 } from "../../../redux/features/product";
-import { TResponse } from "../../../types";
+import { TProduct, TResponse } from "../../../types";
 import { toast } from "sonner";
 import { useState } from "react";
 import CustomModal from "../../../components/ui/CustomModal";
@@ -11,19 +11,38 @@ import { Form, Formik, FormikValues } from "formik";
 import FormikInput from "../../../components/formik/FormikInput";
 import CustomButton from "../../../components/ui/CustomButton";
 import FormikTextarea from "../../../components/formik/FormikTextarea";
+import CustomTable from "../../../components/ui/CustomTable";
 
 const TABLE_HEAD = ["Name", "Price", "Stock", "Category", "Actions"];
-const ProductTable = ({ TABLE_ROWS }) => {
+const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
   const [isEditProductModalOpen, setEditProductModalOpen] = useState(false);
   const [isEditProductDetails, setEditProductDetails] = useState({});
   const [deleteProduct] = useDeleteProductMutation();
   const [updateProduct] = useUpdateProductMutation();
+  const [duplicateProductFunc] = useDuplicateProductMutation();
+
   const handleProductDelete = async (id: string) => {
     console.log(id);
     const toastId = toast.loading("Product deleting please wait!");
     const res = (await deleteProduct({ id: id }).unwrap()) as TResponse;
     toast.success(res.message, { id: toastId, duration: 2000 });
   };
+
+  const handleDuplicateProduct = async (item: TProduct) => {
+    console.log({ item });
+    const toastId = toast.loading("Product duplicating please wait!");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { id, ...productData } = item;
+    try {
+      const res = (await duplicateProductFunc(
+        productData
+      ).unwrap()) as TResponse;
+      toast.success(res.message, { id: toastId, duration: 2000 });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleEditProduct = async (values: FormikValues) => {
     setEditProductModalOpen(false);
     const toastId = toast.loading("Product updating please wait!");
@@ -40,86 +59,39 @@ const ProductTable = ({ TABLE_ROWS }) => {
     const res = (await updateProduct(formdata).unwrap()) as TResponse;
     toast.success(res.message, { id: toastId, duration: 2000 });
   };
+
   return (
     <>
-      <Card className="h-full w-full overflow-scroll px-6">
-        <table className="w-full min-w-max table-auto text-left">
-          <thead>
-            <tr className="">
-              {TABLE_HEAD?.map((head) => (
-                <th key={head} className="border-b border-gray-300 pb-4 pt-10">
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-bold leading-none"
+      <CustomTable tableHead={TABLE_HEAD} label="All Products">
+        {TABLE_ROWS?.map((item) => {
+          return (
+            <tr key={item?.id}>
+              <td className="px-5 py-3 border">{item?.name}</td>
+              <td className="px-5 py-3 border"> {item?.price}</td>
+              <td className="px-5 py-3 border">{item?.stock}</td>
+              <td className="px-5 py-3 border">{item?.category}</td>
+              <td className="px-5 py-3 border">
+                <div className="flex items-center gap-10">
+                  <button
+                    onClick={() => {
+                      setEditProductDetails(item);
+                      setEditProductModalOpen(true);
+                    }}
                   >
-                    {head}
-                  </Typography>
-                </th>
-              ))}
+                    Edit
+                  </button>
+                  <button onClick={() => handleProductDelete(item?.id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => handleDuplicateProduct(item)}>
+                    Duplicate
+                  </button>
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {TABLE_ROWS?.map((item, index) => {
-              const isLast = index === TABLE_ROWS.length - 1;
-              const classes = isLast ? "py-4" : "py-4 border-b border-gray-300";
-
-              return (
-                <tr key={item?.id} className="hover:bg-gray-50">
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-bold"
-                    >
-                      {item?.name}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {item?.price}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {item?.stock}
-                    </Typography>
-                  </td>
-                  <td className={classes}>
-                    <Typography
-                      variant="small"
-                      className="font-normal text-gray-600"
-                    >
-                      {item?.category}
-                    </Typography>
-                  </td>
-                  <td className={`${classes} max-w-[150px]`}>
-                    <div className="flex items-center gap-10">
-                      <button
-                        onClick={() => {
-                          setEditProductDetails(item);
-                          setEditProductModalOpen(true);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button onClick={() => handleProductDelete(item?.id)}>
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </Card>
+          );
+        })}
+      </CustomTable>
       <CustomModal
         open={isEditProductModalOpen}
         setOpen={setEditProductModalOpen}
@@ -128,7 +100,7 @@ const ProductTable = ({ TABLE_ROWS }) => {
           initialValues={isEditProductDetails}
           onSubmit={handleEditProduct}
         >
-          {({ setFieldValue, values }) => {
+          {() => {
             return (
               <Form className="">
                 <div className=" bg-white">

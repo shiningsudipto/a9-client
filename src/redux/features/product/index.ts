@@ -26,6 +26,14 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Product", "Shop"],
     }),
+    duplicateProduct: builder.mutation({
+      query: (productData) => ({
+        url: "/product/duplicate",
+        method: "POST",
+        body: productData,
+      }),
+      invalidatesTags: ["Product", "Shop"],
+    }),
     getShopByVendor: builder.query({
       query: (id) => `/shop/${id}`,
       providesTags: ["Product"],
@@ -38,4 +46,5 @@ export const {
   useGetShopByVendorQuery,
   useDeleteProductMutation,
   useUpdateProductMutation,
+  useDuplicateProductMutation,
 } = productApi;
