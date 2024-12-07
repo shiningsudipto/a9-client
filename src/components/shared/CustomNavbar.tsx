@@ -34,7 +34,7 @@ const CustomNavbar = () => {
       name: "Products",
     },
     {
-      path: `/${user.role}/account`,
+      path: `/${user?.role}/account`,
       name: "Account",
     },
   ];

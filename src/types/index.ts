@@ -39,3 +39,28 @@ export interface TShop {
   status: string;
   owner: TDBUser;
 }
+// review
+export interface TReview {
+  id: string;
+  userId: string;
+  productId: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  user: TReviewUser;
+  product: TReviewProduct;
+}
+
+export interface TReviewUser {
+  name: string;
+  email: string;
+}
+
+export interface TReviewProduct {
+  name: string;
+  shop: TReviewShop;
+}
+
+export interface TReviewShop {
+  name: string;
+}

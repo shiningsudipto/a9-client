@@ -30,6 +30,10 @@ const adminRoutes = [
     path: "shop",
     name: "Shop",
   },
+  {
+    path: "/",
+    name: "Home",
+  },
 ];
 
 const vendorRoutes = [
@@ -44,6 +48,10 @@ const vendorRoutes = [
   {
     path: "orders",
     name: "Orders",
+  },
+  {
+    path: "reviews",
+    name: "Reviews",
   },
   {
     path: "/",
