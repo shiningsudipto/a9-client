@@ -1,7 +1,8 @@
-import { FormikValues } from "formik";
+import { Form, Formik, FormikValues } from "formik";
 import {
   useCreateShopMutation,
   useGetShopByVendorQuery,
+  useUpdateShopMutation,
 } from "../../redux/features/shop";
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
@@ -11,6 +12,11 @@ import { toast } from "sonner";
 import { FaRegEdit } from "react-icons/fa";
 import ProductTable from "./components/ProductTable";
 import CreateProduct from "./components/CreateProduct";
+import CustomModal from "../../components/ui/CustomModal";
+import FormikInput from "../../components/formik/FormikInput";
+import ImgUpload from "../../components/formik/ImgUpload";
+import CustomButton from "../../components/ui/CustomButton";
+import { useState } from "react";
 
 const initialValues = {
   name: "",
@@ -21,10 +27,18 @@ const initialValues = {
 const Shop = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
   const { data, error } = useGetShopByVendorQuery(user.id);
+  const [updateShopFunc] = useUpdateShopMutation();
+  const [isUpdateShopModalOpen, setUpdateShopModalOpen] = useState(false);
 
-  console.log(data, error);
   const shopData = data?.data;
   const [createShop] = useCreateShopMutation();
+
+  const initialValuesOfShopUpdate = {
+    id: shopData?.id,
+    name: shopData?.name,
+    description: shopData?.description,
+    logo: shopData?.logo,
+  };
 
   const handleCreateShop = async (values: FormikValues) => {
     const toastId = toast.loading("Vendor creating please wait!");
@@ -48,8 +62,32 @@ const Shop = () => {
     }
   };
 
+  const handleUpdateShop = async (values: FormikValues) => {
+    setUpdateShopModalOpen(false);
+    const toastId = toast.loading("Shop updating please wait!");
+    const data = {
+      id: shopData?.id,
+      name: values.name,
+      description: values.description,
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    if (values.logo instanceof File) {
+      formData.append("logo", values.logo);
+    }
+    try {
+      const res = (await updateShopFunc(formData).unwrap()) as TResponse;
+      if (res.success) {
+        toast.success(res.message, { id: toastId, duration: 2000 });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+    }
+  };
+
   return (
-    <div className="">
+    <>
       {error?.success === false ? (
         <HandleShop
           initialValues={initialValues}
@@ -75,7 +113,10 @@ const Shop = () => {
                 <p>{shopData?.Order?.length} Order</p>
                 <p>{shopData?.Follower?.length} Followers</p>
               </div>
-              <button className="absolute top-0 right-2 flex items-center gap-2">
+              <button
+                onClick={() => setUpdateShopModalOpen(true)}
+                className="absolute top-0 right-2 flex items-center gap-2"
+              >
                 <FaRegEdit />
                 Edit
               </button>
@@ -89,7 +130,45 @@ const Shop = () => {
           </div>
         </div>
       )}
-    </div>
+      <CustomModal
+        open={isUpdateShopModalOpen}
+        setOpen={setUpdateShopModalOpen}
+        header={true}
+        title="Update Shop"
+      >
+        <Formik
+          initialValues={initialValuesOfShopUpdate}
+          onSubmit={handleUpdateShop}
+        >
+          {({ setFieldValue, values }) => {
+            return (
+              <Form className="">
+                <div className=" bg-white">
+                  <div className="space-y-5">
+                    <FormikInput required name="name" label="Name" />
+                    <FormikInput
+                      required
+                      name="description"
+                      label="Description"
+                    />
+                    <ImgUpload
+                      name="logo"
+                      setFieldValue={setFieldValue}
+                      values={values}
+                    />
+                    <CustomButton
+                      label="Update"
+                      variant="filled"
+                      type="submit"
+                    />
+                  </div>
+                </div>
+              </Form>
+            );
+          }}
+        </Formik>
+      </CustomModal>
+    </>
   );
 };
 

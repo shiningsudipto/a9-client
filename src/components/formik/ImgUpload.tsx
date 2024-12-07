@@ -27,7 +27,7 @@ const ImgUpload = ({
 
   const currentFile =
     typeof values[name] === "string"
-      ? "Upload another"
+      ? "Upload another or don't touch"
       : multiple
       ? `${values[name]?.length || 0} file(s) selected`
       : values[name]?.name || "";
