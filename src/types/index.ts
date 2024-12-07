@@ -29,3 +29,13 @@ export interface TDBUser {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TShop {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  ownerId: string;
+  status: string;
+  owner: TDBUser;
+}

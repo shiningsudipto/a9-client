@@ -3,3 +3,5 @@ export const userRole = {
   USER: "USER",
   VENDOR: "VENDOR",
 };
+
+export const userStatusOptions = ["Active", "Suspend"];

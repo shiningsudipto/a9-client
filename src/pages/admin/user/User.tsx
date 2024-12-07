@@ -12,8 +12,8 @@ import CustomButton from "../../../components/ui/CustomButton";
 import { useState } from "react";
 import FormikDropdown from "../../../components/formik/FormikDropdown";
 import { createOptions } from "../../../utils";
+import { userStatusOptions } from "../../../utils/constants.utils";
 
-const userStatusOptions = ["Active", "Suspend"];
 const tableHead = ["Name", "Email", "Role", "Status", "Actions"];
 
 const User = () => {
