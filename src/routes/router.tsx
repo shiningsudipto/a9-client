@@ -9,6 +9,7 @@ import Account from "../pages/account/Account";
 import Orders from "../pages/vendor/orders/Orders";
 import Category from "../pages/admin/category/Category";
 import User from "../pages/admin/user/User";
+import ShopManagement from "../pages/admin/shop/ShopManagement";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <User />,
+      },
+      {
+        path: "shop",
+        element: <ShopManagement />,
       },
     ],
   },

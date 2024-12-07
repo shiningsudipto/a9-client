@@ -26,6 +26,10 @@ const adminRoutes = [
     path: "users",
     name: "Users",
   },
+  {
+    path: "shop",
+    name: "Shop",
+  },
 ];
 
 const vendorRoutes = [
