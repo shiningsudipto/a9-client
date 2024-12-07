@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Navbar,
   Collapse,
@@ -7,10 +7,6 @@ import {
   IconButton,
   List,
   ListItem,
-  // Menu,
-  // MenuHandler,
-  // MenuList,
-  // MenuItem,
 } from "@material-tailwind/react";
 import {
   // ChevronDownIcon,
@@ -21,50 +17,50 @@ import {
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setUser, useCurrentUser } from "../../redux/slices/auth";
-
-const menuLinks = [
-  {
-    path: "/",
-    name: "Home",
-  },
-  {
-    path: "/products",
-    name: "Products",
-  },
-  {
-    path: "/vendor/account",
-    name: "Account",
-  },
-];
-
-function NavList() {
-  return (
-    <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-      {menuLinks?.map((item, index) => {
-        return (
-          <Typography
-            key={index}
-            as="a"
-            href={item.path}
-            variant="paragraph"
-            color="white"
-            className="font-medium"
-          >
-            <ListItem className="flex items-center gap-2 py-2 pr-4">
-              {item.name}
-            </ListItem>
-          </Typography>
-        );
-      })}
-    </List>
-  );
-}
+import { setUser, TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const CustomNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
-  const user = useAppSelector(useCurrentUser);
+  const user = useAppSelector(useCurrentUser) as TUser;
   const dispatch = useAppDispatch();
+
+  const menuLinks = [
+    {
+      path: "/",
+      name: "Home",
+    },
+    {
+      path: "/products",
+      name: "Products",
+    },
+    {
+      path: `/${user.role}/account`,
+      name: "Account",
+    },
+  ];
+
+  function NavList() {
+    return (
+      <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
+        {menuLinks?.map((item, index) => {
+          return (
+            <Typography
+              key={index}
+              as="a"
+              href={item.path}
+              variant="paragraph"
+              color="white"
+              className="font-medium"
+            >
+              <ListItem className="flex items-center gap-2 py-2 pr-4">
+                {item.name}
+              </ListItem>
+            </Typography>
+          );
+        })}
+      </List>
+    );
+  }
 
   const handleLogout = () => {
     dispatch(setUser({ user: null, token: null }));

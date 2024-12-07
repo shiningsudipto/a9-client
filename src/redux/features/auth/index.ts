@@ -22,6 +22,7 @@ const authApi = baseApi.injectEndpoints({
         method: "PUT",
         body: userData,
       }),
+      invalidatesTags: ["User"],
     }),
     deleteUser: builder.mutation({
       query: (userId) => ({
@@ -35,6 +36,7 @@ const authApi = baseApi.injectEndpoints({
     }),
     getUserById: builder.query({
       query: (id) => `/user/${id}`,
+      providesTags: ["User"],
     }),
   }),
 });

@@ -7,6 +7,7 @@ import AccountLayout from "../components/layouts/AccountLayout";
 import Shop from "../pages/shop/Shop";
 import Account from "../pages/account/Account";
 import Orders from "../pages/vendor/orders/Orders";
+import Category from "../pages/admin/category/Category";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,20 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <Orders />,
+      },
+    ],
+  },
+  {
+    path: "admin",
+    element: <AccountLayout />,
+    children: [
+      {
+        path: "account",
+        element: <Account />,
+      },
+      {
+        path: "category",
+        element: <Category />,
       },
     ],
   },

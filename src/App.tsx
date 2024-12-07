@@ -5,7 +5,7 @@ import { useCurrentUser } from "./redux/slices/auth";
 
 const App = () => {
   const user = useAppSelector(useCurrentUser);
-  console.log(user);
+  console.log({ user });
   return (
     <div>
       <CustomNavbar />
