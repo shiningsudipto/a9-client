@@ -5,7 +5,7 @@ import CustomButton from "../../../components/ui/CustomButton";
 import { useState } from "react";
 import FormikDropdown from "../../../components/formik/FormikDropdown";
 import { useGetAllCategoryQuery } from "../../../redux/features/category";
-import { transformItemsToNameAndValue } from "../../../utils";
+import { transformItemsToValueAndLabel } from "../../../utils";
 import ImgUpload from "../../../components/formik/ImgUpload";
 import { useCreateProductMutation } from "../../../redux/features/product";
 import { toast } from "sonner";
@@ -15,7 +15,7 @@ const CreateProduct = ({ shopId }: { shopId: string }) => {
   const [isCreateProductModalOpen, setCreateProductModalOpen] = useState(false);
   const [createProductFunc] = useCreateProductMutation();
   const { data } = useGetAllCategoryQuery("");
-  const options = transformItemsToNameAndValue(data?.data);
+  const options = transformItemsToValueAndLabel(data?.data);
   const initialValues = {
     name: "",
     price: "",

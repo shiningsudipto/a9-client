@@ -8,6 +8,7 @@ import Shop from "../pages/shop/Shop";
 import Account from "../pages/account/Account";
 import Orders from "../pages/vendor/orders/Orders";
 import Category from "../pages/admin/category/Category";
+import User from "../pages/admin/user/User";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "category",
         element: <Category />,
+      },
+      {
+        path: "users",
+        element: <User />,
       },
     ],
   },

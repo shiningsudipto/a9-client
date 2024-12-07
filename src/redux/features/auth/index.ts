@@ -30,9 +30,11 @@ const authApi = baseApi.injectEndpoints({
         method: "DELETE",
         body: userId,
       }),
+      invalidatesTags: ["User"],
     }),
     getAllUsers: builder.query({
       query: () => `/user/all`,
+      providesTags: ["User"],
     }),
     getUserById: builder.query({
       query: (id) => `/user/${id}`,
