@@ -73,7 +73,10 @@ const CustomNavbar = () => {
     );
   }, []);
   return (
-    <Navbar className="max-w-full px-4 py-1 bg-primary text-white rounded-none shadow-none border-none">
+    <Navbar
+      id="navbar"
+      className="max-w-full px-4 py-1 bg-primary text-white rounded-none shadow-none border-none"
+    >
       <div className="flex items-center justify-between text-white">
         <Link to="/" className="text-xl font-semibold">
           Electro Hub
