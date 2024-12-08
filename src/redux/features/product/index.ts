@@ -38,6 +38,10 @@ const productApi = baseApi.injectEndpoints({
       query: (id) => `/shop/${id}`,
       providesTags: ["Product"],
     }),
+    getFlashSaleProducts: builder.query({
+      query: () => `/product/flash-sale`,
+      providesTags: ["Product"],
+    }),
   }),
 });
 
@@ -47,4 +51,5 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useDuplicateProductMutation,
+  useGetFlashSaleProductsQuery,
 } = productApi;

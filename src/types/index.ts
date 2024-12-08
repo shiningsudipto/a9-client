@@ -36,12 +36,35 @@ export interface TProduct {
   price: number;
   description: string;
   stock: number;
+  discount: number;
   category: string;
   flashSale: boolean;
   images: string[];
   shopId: string;
 }
+export interface TProductWithShop {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  stock: number;
+  discount: number;
+  category: string;
+  flashSale: boolean;
+  images: string[];
+  shopId: string;
+  shop: TShopWithoutOwner;
+}
 
+export interface TShopWithoutOwner {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  ownerId: string;
+  status: string;
+  owner: string;
+}
 export interface TShop {
   id: string;
   name: string;

@@ -12,8 +12,17 @@ import FormikInput from "../../../components/formik/FormikInput";
 import CustomButton from "../../../components/ui/CustomButton";
 import FormikTextarea from "../../../components/formik/FormikTextarea";
 import CustomTable from "../../../components/ui/CustomTable";
+import FormikSwitch from "../../../components/formik/FormikSwitch";
 
-const TABLE_HEAD = ["Name", "Price", "Stock", "Category", "Actions"];
+const TABLE_HEAD = [
+  "Name",
+  "Price",
+  "Stock",
+  "Category",
+  "Flash Sale",
+  "Discount",
+  "Actions",
+];
 const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
   const [isEditProductModalOpen, setEditProductModalOpen] = useState(false);
   const [isEditProductDetails, setEditProductDetails] = useState({});
@@ -46,18 +55,23 @@ const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
   const handleEditProduct = async (values: FormikValues) => {
     setEditProductModalOpen(false);
     const toastId = toast.loading("Product updating please wait!");
-    console.log(values);
     const data = {
       id: values?.id,
       name: values?.name,
       stock: values?.stock,
       description: values?.id,
       price: values?.price,
+      flashSale: values?.flashSale,
+      discount: values?.discount,
     };
-    const formdata = new FormData();
-    formdata.append("data", JSON.stringify(data));
-    const res = (await updateProduct(formdata).unwrap()) as TResponse;
-    toast.success(res.message, { id: toastId, duration: 2000 });
+    try {
+      const formdata = new FormData();
+      formdata.append("data", JSON.stringify(data));
+      const res = (await updateProduct(formdata).unwrap()) as TResponse;
+      toast.success(res.message, { id: toastId, duration: 2000 });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -70,6 +84,10 @@ const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
               <td className="px-5 py-3 border"> {item?.price}</td>
               <td className="px-5 py-3 border">{item?.stock}</td>
               <td className="px-5 py-3 border">{item?.category}</td>
+              <td className="px-5 py-3 border">
+                {item?.flashSale ? "Yes" : "No"}
+              </td>
+              <td className="px-5 py-3 border">{item?.discount}</td>
               <td className="px-5 py-3 border">
                 <div className="flex items-center gap-10">
                   <button
@@ -108,18 +126,15 @@ const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
                     Edit Product
                   </h3>
                   <div className="space-y-5">
-                    <FormikInput required name="name" label="Name" />
-                    <FormikTextarea
-                      required
-                      name="description"
-                      label="Description"
-                    />
-                    <FormikInput required name="stock" label="Stock" />
+                    <FormikInput name="name" label="Name" />
+                    <FormikTextarea name="description" label="Description" />
+                    <FormikInput name="stock" label="Stock" />
+                    <FormikInput type="number" name="price" label="Price" />
+                    <FormikSwitch name="flashSale" label="Flash sale" />
                     <FormikInput
                       type="number"
-                      required
-                      name="price"
-                      label="Price"
+                      name="discount"
+                      label="Discount"
                     />
                     <CustomButton
                       label="Create"
