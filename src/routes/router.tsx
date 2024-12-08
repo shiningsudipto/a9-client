@@ -11,6 +11,7 @@ import Category from "../pages/admin/category/Category";
 import User from "../pages/admin/user/User";
 import ShopManagement from "../pages/admin/shop/ShopManagement";
 import Reviews from "../pages/vendor/reviews/Reviews";
+import FlashSale from "../pages/flashSale/FlashSale";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "flash-sale",
+        element: <FlashSale />,
       },
     ],
   },
