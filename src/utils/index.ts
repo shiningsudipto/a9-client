@@ -1,3 +1,5 @@
+import { TFollower } from "../types";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Result {
   value: string;
@@ -15,4 +17,11 @@ export const createOptions = (options: string[]): Result[] => {
     label: option,
     value: option, //.toLowerCase() if need to transfer in lowercase
   }));
+};
+
+export const isUserFollowingShop = (
+  followers: TFollower[],
+  userId: string
+): boolean => {
+  return followers.some((follower) => follower.userId === userId);
 };

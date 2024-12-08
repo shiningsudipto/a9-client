@@ -12,6 +12,8 @@ import User from "../pages/admin/user/User";
 import ShopManagement from "../pages/admin/shop/ShopManagement";
 import Reviews from "../pages/vendor/reviews/Reviews";
 import FlashSale from "../pages/flashSale/FlashSale";
+import Details from "../pages/details/Details";
+import ShopDetails from "../pages/shopDetails/ShopDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "flash-sale",
         element: <FlashSale />,
+      },
+      {
+        path: "product-details/:id",
+        element: <Details />,
+      },
+      {
+        path: "shop-details/:id",
+        element: <ShopDetails />,
       },
     ],
   },

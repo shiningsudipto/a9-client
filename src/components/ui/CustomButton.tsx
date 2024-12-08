@@ -4,15 +4,18 @@ interface CustomButtonProps {
   label: string;
   type?: "button" | "submit" | "reset";
   variant?: "outlined" | "filled";
+  onclick?: () => void;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   label,
   type = "button",
   variant = "filled",
+  onclick,
 }) => {
   return (
     <Button
+      onClick={onclick}
       type={type}
       fullWidth
       variant={variant}

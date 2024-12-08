@@ -8,8 +8,27 @@ const followApi = baseApi.injectEndpoints({
     getFollowerByShop: builder.query({
       query: (id) => `/follower/shop/${id}`,
     }),
+    createFollow: builder.mutation({
+      query: (productData) => ({
+        url: "/follower",
+        method: "POST",
+        body: productData,
+      }),
+      invalidatesTags: ["Shop"],
+    }),
+    toggleFollow: builder.mutation({
+      query: (followData) => ({
+        url: "/follower/toggle",
+        method: "POST",
+        body: followData,
+      }),
+      invalidatesTags: ["User", "Shop"],
+    }),
   }),
 });
 
-export const { useGetFollowerByShopQuery, useGetFollowingShopsQuery } =
-  followApi;
+export const {
+  useGetFollowerByShopQuery,
+  useGetFollowingShopsQuery,
+  useToggleFollowMutation,
+} = followApi;

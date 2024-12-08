@@ -7,6 +7,7 @@ import CustomButton from "../../../components/ui/CustomButton";
 
 const FlashSale = () => {
   const { data } = useGetFlashSaleProductsQuery("");
+  console.log(data);
   const flashData = data?.data;
   return (
     <div className="section-gap-xy">
@@ -25,7 +26,9 @@ const FlashSale = () => {
               <IoIosFlash className="absolute top-3 text-3xl right-2 text-primary" />
               <div className="space-y-3 mt-2 p-1">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-bold">{item.name}</h3>
+                  <h3 className="text-xl font-bold">
+                    <Link to={`/product-details/${item.id}`}>{item.name}</Link>{" "}
+                  </h3>
                   <p className="text-lg font-semibold flex items-center">
                     {item.price}
                     <TbCurrencyTaka />{" "}

@@ -99,3 +99,9 @@ export interface TReviewProduct {
 export interface TReviewShop {
   name: string;
 }
+
+export type TFollower = {
+  id: string;
+  userId: string;
+  shopId: string;
+};
