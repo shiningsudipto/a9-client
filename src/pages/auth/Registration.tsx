@@ -149,9 +149,9 @@ const Registration = () => {
                   Register
                 </h3>
                 <div className="space-y-5">
-                  <FormikInput name="name" label="Name" />
-                  <FormikInput name="email" label="Email" />
-                  <FormikInput name="password" label="Password" />
+                  <FormikInput required name="name" label="Name" />
+                  <FormikInput required name="email" label="Email" />
+                  <FormikInput required name="password" label="Password" />
                   <Button type="submit" className="w-full">
                     Register
                   </Button>

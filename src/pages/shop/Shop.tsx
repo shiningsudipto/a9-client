@@ -26,7 +26,9 @@ const initialValues = {
 
 const Shop = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
-  const { data, error } = useGetShopByVendorQuery(user.id);
+  const { data, isError, isLoading, refetch } = useGetShopByVendorQuery(
+    user.id
+  );
   const [updateShopFunc] = useUpdateShopMutation();
   const [isUpdateShopModalOpen, setUpdateShopModalOpen] = useState(false);
 
@@ -53,6 +55,7 @@ const Shop = () => {
     try {
       const res = (await createShop(formData).unwrap()) as TResponse;
       console.log({ res });
+      refetch();
       if (res.success) {
         toast.success(res.message, { id: toastId, duration: 2000 });
       }
@@ -86,88 +89,94 @@ const Shop = () => {
     }
   };
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
-      {error?.success === false ? (
+      {isError ? (
         <HandleShop
           initialValues={initialValues}
           handleShopData={handleCreateShop}
         />
       ) : (
-        <div>
+        <>
           <div>
-            <div className="w-[500px] p-5 bg-white rounded-md mx-auto relative mt-10">
-              <div className="flex flex-col items-center space-y-2">
-                <img
-                  src={shopData?.logo}
-                  alt=""
-                  className="size-[150px] rounded-full object-cover"
-                />
-                <p className="text-xl font-bold">{shopData?.name}</p>
-                <p className="text-lg font-medium text-center">
-                  {shopData?.description}
-                </p>
-              </div>
-              <div className="flex items-start justify-between mt-5">
-                <p>{shopData?.Product?.length} Products</p>
-                <p>{shopData?.Order?.length} Order</p>
-                <p>{shopData?.Follower?.length} Followers</p>
-              </div>
-              <button
-                onClick={() => setUpdateShopModalOpen(true)}
-                className="absolute top-0 right-2 flex items-center gap-2"
-              >
-                <FaRegEdit />
-                Edit
-              </button>
-            </div>
-          </div>
-          <div className="flex justify-end mt-5">
-            <div className=" me-10 bg-white w-fit px-10 py-4">
-              <CreateProduct shopId={shopData?.id} />
-            </div>
-          </div>
-          <ProductTable TABLE_ROWS={shopData?.Product} />
-        </div>
-      )}
-      <CustomModal
-        open={isUpdateShopModalOpen}
-        setOpen={setUpdateShopModalOpen}
-        header={true}
-        title="Update Shop"
-      >
-        <Formik
-          initialValues={initialValuesOfShopUpdate}
-          onSubmit={handleUpdateShop}
-        >
-          {({ setFieldValue, values }) => {
-            return (
-              <Form className="">
-                <div className=" bg-white">
-                  <div className="space-y-5">
-                    <FormikInput required name="name" label="Name" />
-                    <FormikInput
-                      required
-                      name="description"
-                      label="Description"
-                    />
-                    <ImgUpload
-                      name="logo"
-                      setFieldValue={setFieldValue}
-                      values={values}
-                    />
-                    <CustomButton
-                      label="Update"
-                      variant="filled"
-                      type="submit"
-                    />
-                  </div>
+            <div>
+              <div className="w-[500px] p-5 bg-white rounded-md mx-auto relative mt-10">
+                <div className="flex flex-col items-center space-y-2">
+                  <img
+                    src={shopData?.logo}
+                    alt=""
+                    className="size-[150px] rounded-full object-cover"
+                  />
+                  <p className="text-xl font-bold">{shopData?.name}</p>
+                  <p className="text-lg font-medium text-center">
+                    {shopData?.description}
+                  </p>
                 </div>
-              </Form>
-            );
-          }}
-        </Formik>
-      </CustomModal>
+                <div className="flex items-start justify-between mt-5">
+                  <p>{shopData?.Product?.length} Products</p>
+                  <p>{shopData?.Order?.length} Order</p>
+                  <p>{shopData?.Follower?.length} Followers</p>
+                </div>
+                <button
+                  onClick={() => setUpdateShopModalOpen(true)}
+                  className="absolute top-0 right-2 flex items-center gap-2"
+                >
+                  <FaRegEdit />
+                  Edit
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-end mt-5">
+              <div className=" me-10 bg-white w-fit px-10 py-4">
+                <CreateProduct shopId={shopData?.id} />
+              </div>
+            </div>
+            <ProductTable TABLE_ROWS={shopData?.Product} />
+          </div>
+          <CustomModal
+            open={isUpdateShopModalOpen}
+            setOpen={setUpdateShopModalOpen}
+            header={true}
+            title="Update Shop"
+          >
+            <Formik
+              initialValues={initialValuesOfShopUpdate}
+              onSubmit={handleUpdateShop}
+            >
+              {({ setFieldValue, values }) => {
+                return (
+                  <Form className="">
+                    <div className=" bg-white">
+                      <div className="space-y-5">
+                        <FormikInput required name="name" label="Name" />
+                        <FormikInput
+                          required
+                          name="description"
+                          label="Description"
+                        />
+                        <ImgUpload
+                          name="logo"
+                          setFieldValue={setFieldValue}
+                          values={values}
+                        />
+                        <CustomButton
+                          label="Update"
+                          variant="filled"
+                          type="submit"
+                        />
+                      </div>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </CustomModal>
+        </>
+      )}
     </>
   );
 };

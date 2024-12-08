@@ -4,6 +4,7 @@ import { ChangeEvent } from "react";
 
 interface InputProps {
   name: string;
+  placeholder?: string;
   required?: boolean;
   multiple?: boolean;
   values: Record<string, any>; // Generic record for Formik values
@@ -12,6 +13,7 @@ interface InputProps {
 
 const ImgUpload = ({
   name,
+  placeholder,
   required = false,
   multiple = false,
   setFieldValue,
@@ -45,6 +47,7 @@ const ImgUpload = ({
 
         {/* File Name or Count Display */}
         <input
+          placeholder={placeholder}
           type="text"
           className="border-b border-gray-400 w-full px-3 focus-visible:outline-none focus-visible:border-b-2 focus-visible:border-black"
           value={currentFile}

@@ -44,18 +44,12 @@ const CustomNavbar = () => {
       <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
         {menuLinks?.map((item, index) => {
           return (
-            <Typography
+            <ListItem
               key={index}
-              as="a"
-              href={item.path}
-              variant="paragraph"
-              color="white"
-              className="font-medium"
+              className="flex items-center gap-2 py-2 pr-4 text-white"
             >
-              <ListItem className="flex items-center gap-2 py-2 pr-4">
-                {item.name}
-              </ListItem>
-            </Typography>
+              <Link to={item.path}>{item.name}</Link>
+            </ListItem>
           );
         })}
       </List>

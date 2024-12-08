@@ -14,6 +14,7 @@ import Reviews from "../pages/vendor/reviews/Reviews";
 import FlashSale from "../pages/flashSale/FlashSale";
 import Details from "../pages/details/Details";
 import ShopDetails from "../pages/shopDetails/ShopDetails";
+import Products from "../pages/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "shop-details/:id",
         element: <ShopDetails />,
+      },
+      {
+        path: "products",
+        element: <Products />,
       },
     ],
   },

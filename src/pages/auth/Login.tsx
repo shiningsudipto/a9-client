@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser, TUser } from "../../redux/slices/auth";
 import { verifyToken } from "../../utils/verifyToken";
+import { userRole } from "../../utils/constants.utils";
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -23,7 +24,11 @@ const Login = () => {
         toast.success(res.message, { id: toastId, duration: 2000 });
         const user = verifyToken(res.data.token) as TUser;
         dispatch(setUser({ user: user, token: res.data.token }));
-        navigate("/");
+        if (user.role === userRole.VENDOR) {
+          navigate("/vendor/shop");
+        } else {
+          navigate("/");
+        }
       }
     } catch (error) {
       console.log(error);

@@ -80,7 +80,7 @@ const ProductTable = ({ TABLE_ROWS }: { TABLE_ROWS: TProduct[] }) => {
         {TABLE_ROWS?.map((item) => {
           return (
             <tr key={item?.id}>
-              <td className="px-5 py-3 border">{item?.name}</td>
+              <td className="px-5 py-3 border">{item?.name.slice(0, 30)}...</td>
               <td className="px-5 py-3 border"> {item?.price}</td>
               <td className="px-5 py-3 border">{item?.stock}</td>
               <td className="px-5 py-3 border">{item?.category}</td>

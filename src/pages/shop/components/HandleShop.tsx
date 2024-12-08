@@ -21,7 +21,7 @@ const HandleShop: React.FC<HandleShopProps> = ({
   handleShopData,
 }) => {
   return (
-    <div>
+    <div className="mt-10">
       <Formik initialValues={initialValues} onSubmit={handleShopData}>
         {({ setFieldValue, values }) => {
           return (
@@ -39,6 +39,7 @@ const HandleShop: React.FC<HandleShopProps> = ({
                   />
                   <ImgUpload
                     name="logo"
+                    placeholder="Upload logo"
                     setFieldValue={setFieldValue}
                     values={values}
                   />
