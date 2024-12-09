@@ -9,8 +9,6 @@ const Details = () => {
 
   const productData = data?.data;
 
-  console.log({ productData });
-
   return (
     <div className="section-gap-xy">
       {productData ? (

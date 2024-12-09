@@ -42,6 +42,30 @@ const productApi = baseApi.injectEndpoints({
       query: () => `/product/flash-sale`,
       providesTags: ["Product"],
     }),
+    getAllProducts: builder.query({
+      query: (searchOptions) => {
+        // console.log("Search Options:", searchOptions);
+        const params = new URLSearchParams();
+
+        // Append each search option to the query string if it has a value
+        if (searchOptions.limit)
+          params.append("limit", searchOptions.limit.toString());
+        if (searchOptions.page)
+          params.append("page", searchOptions.page.toString());
+        if (searchOptions.sortBy) params.append("sortBy", searchOptions.sortBy);
+        if (searchOptions.sortOrder)
+          params.append("sortOrder", searchOptions.sortOrder);
+        if (searchOptions.searchTerm)
+          params.append("searchTerm", searchOptions.searchTerm);
+        if (searchOptions.category)
+          params.append("category", searchOptions.category);
+
+        // Construct the final URL with query parameters
+        const queryString = params.toString();
+        return `/product?${queryString}`;
+      },
+      providesTags: ["Product"],
+    }),
     getProductDetails: builder.query({
       query: (id) => `/product/${id}`,
       providesTags: ["Product"],
@@ -57,4 +81,5 @@ export const {
   useDuplicateProductMutation,
   useGetFlashSaleProductsQuery,
   useGetProductDetailsQuery,
+  useGetAllProductsQuery,
 } = productApi;
