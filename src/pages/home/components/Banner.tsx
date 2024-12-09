@@ -1,7 +1,8 @@
-import { Button, Carousel } from "@material-tailwind/react";
+import { Carousel } from "@material-tailwind/react";
 import img1 from "../../../assets/carousel/electronic-shop.jpg";
 import img2 from "../../../assets/carousel/cart-products.jpg";
 import img3 from "../../../assets/carousel/laptop-cart.jpg";
+import SearchProducts from "../../../components/shared/SearchProducts";
 const Banner = () => {
   const promotionalOffers = [
     {
@@ -23,7 +24,11 @@ const Banner = () => {
 
   return (
     <section>
-      <Carousel autoplay={true} loop={true} className="">
+      <Carousel
+        // autoplay={true}
+        loop={true}
+        className=""
+      >
         {promotionalOffers.map((item, index) => {
           return (
             <div key={index} className="relative h-[80vh] w-full">
@@ -37,7 +42,7 @@ const Banner = () => {
                   <h2 className="text-6xl font-bold">{item.title}</h2>
                   <h4 className="text-4xl font-semibold">{item.subtitle}</h4>
                   <div className="mt-5">
-                    <Button className="text-base bg-secondary">Shop Now</Button>
+                    <SearchProducts />
                   </div>
                 </div>
               </div>

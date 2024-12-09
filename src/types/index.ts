@@ -114,3 +114,9 @@ export interface TReview {
   comment: string;
   createdAt: string;
 }
+
+export interface TCategory {
+  id: string;
+  name: string;
+  createdAt: string;
+}

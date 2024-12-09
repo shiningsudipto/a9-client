@@ -8,40 +8,46 @@ import ProductCard from "../../components/ui/ProductCard";
 import { useGetAllCategoryQuery } from "../../redux/features/category";
 import { transformItemsToValueAndLabel } from "../../utils";
 import { useAppDispatch } from "../../redux/hooks";
-import { Radio } from "@material-tailwind/react";
+import { Radio, Slider } from "@material-tailwind/react";
+import SearchProducts from "../../components/shared/SearchProducts";
+import { useEffect, useState } from "react";
+
+const priceSortOptions = [
+  {
+    label: "Ascending",
+    value: "asc",
+  },
+  {
+    label: "Descending",
+    value: "desc",
+  },
+];
 
 const Products = () => {
   const searchOptions = useSelector(useSearchOptions);
   // console.log(searchOptions);
   const { data } = useGetAllProductsQuery(searchOptions);
   const productsData = data?.data?.data;
-  // console.log(productsData);
+  const [allProducts, setProducts] = useState(productsData);
+  console.log({ allProducts });
   const { data: categoryData } = useGetAllCategoryQuery("");
   const allCategory = categoryData?.data;
-  console.log(allCategory);
   const categoryOptions = transformItemsToValueAndLabel(allCategory);
-  console.log(categoryOptions);
   const dispatch = useAppDispatch();
 
-  const priceSortOptions = [
-    {
-      label: "Ascending",
-      value: "asc",
-    },
-    {
-      label: "Descending",
-      value: "desc",
-    },
-  ];
+  useEffect(() => {
+    setProducts(productsData);
+  }, [data, productsData]);
 
-  const setSearchValueToTheSlice = (name, value) => {
+  const setSearchValueToTheSlice = (name: string, value: string) => {
     dispatch(setSearchOptions({ [name]: value }));
   };
 
   return (
     <div className="section-gap-xy grid gap-10 grid-cols-4">
       <div className="bg-gray-50">
-        <div>
+        <SearchProducts />
+        <div className="mt-5">
           <p className="text-xl font-bold mb-4">Categories:</p>
           <div className="flex flex-col">
             <Radio
@@ -84,9 +90,18 @@ const Products = () => {
             ))}
           </div>
         </div>
+        {/* Price Slider */}
+        <div className="mt-5">
+          <p className="text-xl font-bold mb-4">Filter by Price:</p>
+          <div className="flex items-center gap-4">
+            <span className="text-gray-700">${0}</span>
+            <Slider defaultValue={50} />
+            <span className="text-gray-700">20</span>
+          </div>
+        </div>
       </div>
       <div className="col-span-3">
-        <ProductCard products={productsData} cols={3} />
+        <ProductCard products={allProducts} cols={3} />
       </div>
     </div>
   );
