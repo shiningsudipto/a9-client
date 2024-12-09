@@ -105,3 +105,12 @@ export type TFollower = {
   userId: string;
   shopId: string;
 };
+
+export interface TReview {
+  id: string;
+  userId: string;
+  productId: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+}

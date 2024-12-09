@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../redux/features/product";
 import CustomButton from "../../components/ui/CustomButton";
+import ReviewCard from "../../components/ui/ReviewCard";
 
 const Details = () => {
   const { id } = useParams();
@@ -8,8 +9,10 @@ const Details = () => {
 
   const productData = data?.data;
 
+  console.log({ productData });
+
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="section-gap-xy">
       {productData ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Product Images */}
@@ -71,6 +74,7 @@ const Details = () => {
               </div>
             </div>
           </div>
+          <ReviewCard reviews={productData?.Reviews} />
         </div>
       ) : (
         <p className="text-center text-gray-400">Loading...</p>
