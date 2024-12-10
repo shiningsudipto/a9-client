@@ -17,6 +17,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setUser, TUser, useCurrentUser } from "../../redux/slices/auth";
+import CustomDrawer from "../ui/CustomDrawer";
 
 const CustomNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -72,9 +73,9 @@ const CustomNavbar = () => {
   return (
     <Navbar
       id="navbar"
-      className="max-w-full px-4 py-1 bg-primary text-white rounded-none shadow-none border-none"
+      className="max-w-full px-4 py-1 bg-primary text-white rounded-none shadow-none border-none z-0 "
     >
-      <div className="flex items-center justify-between text-white">
+      <div className="flex items-center justify-between text-white z-0">
         <Link to="/" className="text-xl font-semibold">
           Electro Hub
         </Link>
@@ -98,9 +99,9 @@ const CustomNavbar = () => {
               </Button>
             </Link>
           )}
-          <Button className="text-white text-2xl bg-transparent shadow-none hover:shadow-none">
-            <HiOutlineShoppingCart />
-          </Button>
+          {/* <div className="z-[9999]">
+            <CustomDrawer />
+          </div> */}
         </div>
         <IconButton
           variant="text"

@@ -14,7 +14,7 @@ const Details = () => {
 
   const productData = data?.data;
 
-  if (user.role === userRole.USER) {
+  if (user.role === userRole.USER || null) {
     storeRecentProduct(productData);
   }
 

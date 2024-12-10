@@ -1,6 +1,13 @@
 import { IoMdCart } from "react-icons/io";
 import { TProduct } from "../../types";
 import { Link } from "react-router-dom";
+import {
+  addProduct,
+  replaceCart,
+  useCartOptions,
+} from "../../redux/slices/cart";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { toast } from "sonner";
 
 const ProductCard = ({
   products,
@@ -9,6 +16,39 @@ const ProductCard = ({
   products: TProduct[];
   cols?: number;
 }) => {
+  const dispatch = useAppDispatch();
+  const { vendorId } = useAppSelector(useCartOptions);
+
+  // Function to handle adding product to the cart
+  const handleAddToCart = (product: TProduct) => {
+    const productData = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: 1,
+      vendorId: product.shopId,
+      image: product.images[0],
+    };
+
+    // If vendorId exists and is different, show warning
+    if (vendorId && vendorId !== product.shopId) {
+      // Replace or cancel logic
+      const confirmReplace = window.confirm(
+        "Your cart contains items from another vendor. Do you want to replace the cart?"
+      );
+      if (confirmReplace) {
+        dispatch(replaceCart([productData]));
+        toast.success("Cart replaced with the new product!");
+      } else {
+        toast.info("Action canceled. Cart remains unchanged.");
+      }
+    } else {
+      // Add product to cart
+      dispatch(addProduct(productData));
+      toast.success(`${product.name} added to cart!`);
+    }
+  };
+
   return (
     <div>
       {products?.length > 0 ? (
@@ -45,7 +85,10 @@ const ProductCard = ({
                       </span>
                     )}
                   </p>
-                  <button className="flex items-center justify-center gap-2 mt-4 w-full bg-primary-500 text-white py-2 rounded-md hover:bg-primary-600 transition">
+                  <button
+                    onClick={() => handleAddToCart(product)}
+                    className="flex items-center justify-center gap-2 mt-4 w-full bg-primary-500 text-white py-2 rounded-md hover:bg-primary-600 transition"
+                  >
                     <IoMdCart />
                     Add to Cart
                   </button>

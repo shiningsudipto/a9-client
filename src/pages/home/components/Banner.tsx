@@ -27,11 +27,11 @@ const Banner = () => {
       <Carousel
         // autoplay={true}
         loop={true}
-        className=""
+        className="z-0"
       >
         {promotionalOffers.map((item, index) => {
           return (
-            <div key={index} className="relative h-[80vh] w-full">
+            <div key={index} className="relative h-[80vh] w-full z-0">
               <img
                 src={item.img}
                 alt="image 1"

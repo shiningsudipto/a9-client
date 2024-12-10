@@ -6,7 +6,7 @@ import { getFromLocalstorage } from "../../utils/localstorage.utils";
 
 const RecentProducts = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
-  if (user.role !== userRole.USER) {
+  if (user.role !== userRole.USER && user.role !== null) {
     return <p>This page is only for customer!</p>;
   }
 
