@@ -15,6 +15,7 @@ import FlashSale from "../pages/flashSale/FlashSale";
 import Details from "../pages/details/Details";
 import ShopDetails from "../pages/shopDetails/ShopDetails";
 import Products from "../pages/Products/Products";
+import RecentProducts from "../pages/recent-products/RecentProducts";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         path: "products",
         element: <Products />,
       },
+      {
+        path: "recent-products",
+        element: <RecentProducts />,
+      },
     ],
   },
   {
@@ -62,6 +67,16 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <Reviews />,
+      },
+    ],
+  },
+  {
+    path: "user",
+    element: <AccountLayout />,
+    children: [
+      {
+        path: "account",
+        element: <Account />,
       },
     ],
   },

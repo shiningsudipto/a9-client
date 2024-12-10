@@ -36,6 +36,10 @@ const CustomNavbar = () => {
       path: `/${user?.role}/account`,
       name: "Account",
     },
+    {
+      path: `recent-products`,
+      name: "Recent Products",
+    },
   ];
 
   function NavList() {
@@ -45,7 +49,7 @@ const CustomNavbar = () => {
           return (
             <ListItem
               key={index}
-              className="flex items-center gap-2 py-2 pr-4 text-white"
+              className="flex items-center gap-2 py-2 pr-4 text-white w-auto"
             >
               <Link to={item.path}>{item.name}</Link>
             </ListItem>

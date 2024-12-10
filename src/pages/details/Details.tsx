@@ -2,12 +2,21 @@ import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../redux/features/product";
 import CustomButton from "../../components/ui/CustomButton";
 import ReviewCard from "../../components/ui/ReviewCard";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
+import { userRole } from "../../utils/constants.utils";
+import { storeRecentProduct } from "../../utils/localstorage.utils";
 
 const Details = () => {
   const { id } = useParams();
   const { data } = useGetProductDetailsQuery(id);
+  const user = useAppSelector(useCurrentUser) as TUser;
 
   const productData = data?.data;
+
+  if (user.role === userRole.USER) {
+    storeRecentProduct(productData);
+  }
 
   return (
     <div className="section-gap-xy">

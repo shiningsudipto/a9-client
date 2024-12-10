@@ -21,7 +21,7 @@ export const storeRecentProduct = (product: TProduct) => {
   );
 
   // Check for duplicates using product.id
-  const isDuplicate = storedProducts.some((p) => p.id === product.id);
+  const isDuplicate = storedProducts.some((p) => p?.id === product?.id);
 
   if (!isDuplicate) {
     // Add the new product to the beginning of the list

@@ -16,32 +16,32 @@ const ProductCard = ({
           className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${cols} gap-6`}
         >
           {products.map((product: TProduct) => {
-            const titleLengthCount = product.name.length;
+            const titleLengthCount = product?.name?.length;
             return (
               <div
-                key={product.id}
+                key={product?.id}
                 className="bg-white shadow-md rounded-lg overflow-hidden"
               >
                 <img
-                  src={product.images[0]}
-                  alt={product.name}
+                  src={product?.images[0]}
+                  alt={product?.name}
                   className="h-48 w-full object-cover"
                 />
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-gray-800">
                     <Link to={`/product-details/${product?.id}`}>
                       {titleLengthCount > 40 ? (
-                        <>{product.name.slice(0, 40)}...</>
+                        <>{product?.name.slice(0, 40)}...</>
                       ) : (
-                        product.name
+                        product?.name
                       )}
                     </Link>
                   </h3>
                   <p className="text-gray-600 mt-1">
-                    ${product.price}{" "}
-                    {product.discount > 0 && (
+                    ${product?.price}{" "}
+                    {product?.discount > 0 && (
                       <span className="text-red-500 text-sm ml-2">
-                        -{product.discount}% Off
+                        -{product?.discount}% Off
                       </span>
                     )}
                   </p>
