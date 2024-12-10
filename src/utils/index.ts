@@ -23,5 +23,5 @@ export const isUserFollowingShop = (
   followers: TFollower[],
   userId: string
 ): boolean => {
-  return followers.some((follower) => follower.userId === userId);
+  return followers?.some((follower) => follower?.userId === userId);
 };

@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../../redux/features/product";
-import CustomButton from "../../components/ui/CustomButton";
 import ReviewCard from "../../components/ui/ReviewCard";
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
@@ -60,7 +59,7 @@ const Details = () => {
                 </p>
               )}
               <div className="w-fit">
-                <CustomButton label="Add to cart" />
+                {/* <CustomButton label="Add to cart" /> */}
               </div>
             </div>
 

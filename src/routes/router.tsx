@@ -16,6 +16,7 @@ import Details from "../pages/details/Details";
 import ShopDetails from "../pages/shopDetails/ShopDetails";
 import Products from "../pages/Products/Products";
 import RecentProducts from "../pages/recent-products/RecentProducts";
+import Comparison from "../pages/comparison/Comparison";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +44,8 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        path: "recent-products",
-        element: <RecentProducts />,
+        path: "comparison",
+        element: <Comparison />,
       },
     ],
   },

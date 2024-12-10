@@ -15,6 +15,7 @@ import baseApi from "./api/baseApi";
 import authReducer from "./slices/auth";
 import searchReducer from "./slices/searchOptions";
 import cartReducer from "./slices/cart";
+import comparisonReducer from "./slices/comparison";
 
 const persistConfig = {
   key: "auth",
@@ -34,6 +35,7 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     cart: persistedCartReducer,
     searchOptions: searchReducer,
+    comparison: comparisonReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

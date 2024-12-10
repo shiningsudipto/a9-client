@@ -13,11 +13,9 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { HiOutlineShoppingCart } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setUser, TUser, useCurrentUser } from "../../redux/slices/auth";
-import CustomDrawer from "../ui/CustomDrawer";
 
 const CustomNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -40,6 +38,10 @@ const CustomNavbar = () => {
     {
       path: `recent-products`,
       name: "Recent Products",
+    },
+    {
+      path: `comparison`,
+      name: "Comparison",
     },
   ];
 

@@ -17,12 +17,12 @@ const ShopDetails = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
   const [toggleFollowFunc] = useToggleFollowMutation();
 
-  const isFollowing = isUserFollowingShop(shop.Follower, user.id);
+  const isFollowing = isUserFollowingShop(shop?.Follower, user?.id);
 
   const handleToggleFollow = async () => {
     const toastId = toast.loading("Action in progress please wait!");
     const data = {
-      userId: user.id,
+      userId: user?.id,
       shopId: shop?.id,
     };
     try {

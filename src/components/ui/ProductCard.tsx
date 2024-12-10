@@ -8,6 +8,11 @@ import {
 } from "../../redux/slices/cart";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { toast } from "sonner";
+import {
+  addToComparison,
+  selectComparison,
+} from "../../redux/slices/comparison";
+import { GrCompare } from "react-icons/gr";
 
 const ProductCard = ({
   products,
@@ -49,6 +54,44 @@ const ProductCard = ({
     }
   };
 
+  const comparisonState = useAppSelector(selectComparison);
+
+  const handleAddToComparison = (product: TProduct) => {
+    const currentCategory = comparisonState.category;
+
+    if (comparisonState.products.length === 0) {
+      dispatch(
+        addToComparison({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          category: product.category,
+          discount: product.discount,
+          rating: 0,
+        })
+      );
+      toast.success("Product added for comparison.");
+    } else if (currentCategory !== product.category) {
+      toast.error("Only products from the same category can be compared.");
+    } else if (comparisonState.products.some((p) => p.id === product.id)) {
+      toast.warning("Product is already in the comparison list.");
+    } else if (comparisonState.products.length >= 3) {
+      toast.error("You can compare up to three products only.");
+    } else {
+      dispatch(
+        addToComparison({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          category: product.category,
+          discount: product.discount,
+          rating: 0,
+        })
+      );
+      toast.success("Product added for comparison.");
+    }
+  };
+
   return (
     <div>
       {products?.length > 0 ? (
@@ -60,13 +103,19 @@ const ProductCard = ({
             return (
               <div
                 key={product?.id}
-                className="bg-white shadow-md rounded-lg overflow-hidden"
+                className="bg-white shadow-md rounded-lg overflow-hidden relative"
               >
                 <img
                   src={product?.images[0]}
                   alt={product?.name}
                   className="h-48 w-full object-cover"
                 />
+                <button
+                  onClick={() => handleAddToComparison(product)}
+                  className="absolute top-1 right-1 text-white bg-primary py-1 px-2 rounded-md"
+                >
+                  <GrCompare />
+                </button>
                 <div className="p-4">
                   <h3 className="text-lg font-semibold text-gray-800">
                     <Link to={`/product-details/${product?.id}`}>
