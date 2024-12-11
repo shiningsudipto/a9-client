@@ -1,19 +1,29 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetProductDetailsQuery } from "../../redux/features/product";
+import {
+  useGetProductByCategoryQuery,
+  useGetProductDetailsQuery,
+} from "../../redux/features/product";
 import ReviewCard from "../../components/ui/ReviewCard";
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
 import { userRole } from "../../utils/constants.utils";
 import { storeRecentProduct } from "../../utils/localstorage.utils";
+import { TProductWithShop } from "../../types";
+import ProductCard from "../../components/ui/ProductCard";
 
 const Details = () => {
   const { id } = useParams();
   const { data } = useGetProductDetailsQuery(id);
   const user = useAppSelector(useCurrentUser) as TUser;
 
-  const productData = data?.data;
+  const productData = data?.data as TProductWithShop;
 
-  if (user.role === userRole.USER || null) {
+  const { data: categoryData } = useGetProductByCategoryQuery(
+    productData?.category
+  );
+  console.log(categoryData);
+
+  if (user?.role === userRole?.USER || null) {
     storeRecentProduct(productData);
   }
 
@@ -24,11 +34,11 @@ const Details = () => {
           {/* Product Images */}
           <div className="relative">
             <img
-              src={productData.images?.[0]}
-              alt={productData.name}
+              src={productData?.images?.[0]}
+              alt={productData?.name}
               className="w-full h-auto object-cover rounded-lg shadow-lg"
             />
-            {productData.flashSale && (
+            {productData?.flashSale && (
               <div className="absolute top-4 left-4 bg-primary-400 text-white px-4 py-1 rounded-full text-sm font-bold">
                 Flash Sale
               </div>
@@ -37,25 +47,27 @@ const Details = () => {
 
           {/* Product Info */}
           <div className="space-y-6">
-            <h1 className="text-3xl font-bold text-text">{productData.name}</h1>
+            <h1 className="text-3xl font-bold text-text">
+              {productData?.name}
+            </h1>
             <p className="text-xl font-semibold text-secondary-500">
-              ${productData.price}
+              ${productData?.price}
             </p>
-            <p className="">{productData.description}</p>
+            <p className="">{productData?.description}</p>
 
             {/* Additional Details */}
             <div className="space-y-2">
               <p className="">
                 <span className="font-semibold">Category:</span>{" "}
-                {productData.category}
+                {productData?.category}
               </p>
               <p className="">
                 <span className="font-semibold">Stock:</span>{" "}
-                {productData.stock}
+                {productData?.stock}
               </p>
-              {productData.discount && (
+              {productData?.discount && (
                 <p className="text-primary-500">
-                  Discount: {productData.discount}%
+                  Discount: {productData?.discount}%
                 </p>
               )}
               <div className="w-fit">
@@ -66,25 +78,28 @@ const Details = () => {
             {/* Shop Information */}
             <div className="flex items-center gap-4 mt-4 p-4 border rounded-lg shadow-sm">
               <img
-                src={productData.shop?.logo}
-                alt={productData.shop?.name}
+                src={productData?.shop?.logo}
+                alt={productData?.shop?.name}
                 className="w-20 h-20 object-cover rounded-full"
               />
               <div>
                 <p className="font-semibold text-secondary-600">
                   <Link to={`/shop-details/${productData?.shop?.id}`}>
-                    {productData.shop?.name}
+                    {productData?.shop?.name}
                   </Link>
                 </p>
-                <p className="mb-5">{productData.shop?.description}</p>
+                <p className="mb-5">{productData?.shop?.description}</p>
               </div>
             </div>
           </div>
-          <ReviewCard reviews={productData?.Reviews} />
         </div>
       ) : (
         <p className="text-center text-gray-400">Loading...</p>
       )}
+      <div className="mt-10">
+        <p className="text-2xl font-bold mb-5">Related products</p>
+        <ProductCard cols={4} products={categoryData?.data} />
+      </div>
     </div>
   );
 };

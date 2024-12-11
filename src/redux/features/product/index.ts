@@ -70,6 +70,9 @@ const productApi = baseApi.injectEndpoints({
       query: (id) => `/product/${id}`,
       providesTags: ["Product"],
     }),
+    getProductByCategory: builder.query({
+      query: (category) => `/product/category/${category}`,
+    }),
   }),
 });
 
@@ -82,4 +85,5 @@ export const {
   useGetFlashSaleProductsQuery,
   useGetProductDetailsQuery,
   useGetAllProductsQuery,
+  useGetProductByCategoryQuery,
 } = productApi;
