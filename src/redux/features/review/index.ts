@@ -9,10 +9,21 @@ const reviewApi = baseApi.injectEndpoints({
     getReviewByVendor: builder.query({
       query: (id) => `/review/shop-owner/${id}`,
     }),
+    getReviewByUser: builder.query({
+      query: (id) => `/review/user/${id}`,
+    }),
     createReview: builder.mutation({
       query: (reviewData) => ({
         url: "/review",
         method: "POST",
+        body: reviewData,
+      }),
+      invalidatesTags: ["Review"],
+    }),
+    updateReview: builder.mutation({
+      query: (reviewData) => ({
+        url: "/review",
+        method: "PUT",
         body: reviewData,
       }),
       invalidatesTags: ["Review"],
