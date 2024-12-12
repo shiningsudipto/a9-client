@@ -17,6 +17,8 @@ import ShopDetails from "../pages/shopDetails/ShopDetails";
 import Products from "../pages/Products/Products";
 import RecentProducts from "../pages/recent-products/RecentProducts";
 import Comparison from "../pages/comparison/Comparison";
+import ForgetPassword from "../pages/auth/ForgetPassword";
+import ResetPassword from "../pages/auth/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "comparison",
         element: <Comparison />,
+      },
+      {
+        path: "recent-products",
+        element: <RecentProducts />,
       },
     ],
   },
@@ -110,6 +116,14 @@ const router = createBrowserRouter([
   {
     path: "/registration",
     element: <Registration />,
+  },
+  {
+    path: "forget-password",
+    element: <ForgetPassword />,
+  },
+  {
+    path: "reset-password",
+    element: <ResetPassword />,
   },
 ]);
 
