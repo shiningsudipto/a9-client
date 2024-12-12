@@ -19,6 +19,7 @@ import RecentProducts from "../pages/recent-products/RecentProducts";
 import Comparison from "../pages/comparison/Comparison";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
+import Checkout from "../pages/checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "recent-products",
         element: <RecentProducts />,
+      },
+      {
+        path: "checkout",
+        element: <Checkout />,
       },
     ],
   },

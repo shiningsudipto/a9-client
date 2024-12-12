@@ -13,7 +13,7 @@ import {
   useCartOptions,
 } from "../../redux/slices/cart";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { TbCurrencyTaka } from "react-icons/tb";
 import CustomButton from "./CustomButton";
@@ -21,10 +21,16 @@ import { MdOutlineCancel } from "react-icons/md";
 const CustomDrawer = () => {
   const { products, totalCost } = useAppSelector(useCartOptions);
   const dispatch = useAppDispatch();
-
   const [openRight, setOpenRight] = useState(false);
+  const navigate = useNavigate();
+
   const openDrawerRight = () => setOpenRight(true);
   const closeDrawerRight = () => setOpenRight(false);
+
+  const handleCheckout = async () => {
+    navigate("/checkout");
+  };
+
   return (
     <div>
       <div className="flex flex-wrap gap-4">
@@ -95,7 +101,11 @@ const CustomDrawer = () => {
               <TbCurrencyTaka />{" "}
             </span>
           </p>
-          <CustomButton label="Checkout" variant="filled" />
+          <CustomButton
+            label="Checkout"
+            variant="filled"
+            onclick={handleCheckout}
+          />
           <CustomButton
             label="Clear all"
             variant="outlined"
