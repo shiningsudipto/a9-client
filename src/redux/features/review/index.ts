@@ -35,4 +35,5 @@ export const {
   useCreateReviewMutation,
   useGetReviewByProductQuery,
   useGetReviewByVendorQuery,
+  useUpdateReviewMutation,
 } = reviewApi;

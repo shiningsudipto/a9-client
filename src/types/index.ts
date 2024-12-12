@@ -81,6 +81,7 @@ export interface TReview {
   productId: string;
   rating: number;
   comment: string;
+  reply: string | null;
   createdAt: string;
   user: TReviewUser;
   product: TReviewProduct;
