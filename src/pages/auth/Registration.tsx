@@ -18,7 +18,7 @@ const customerInitialValues = {
   email: "",
   password: "",
   address: "",
-  avatar: "",
+  avatar: File,
 };
 const vendorInitialValues = {
   name: "",
@@ -110,15 +110,20 @@ const Registration = () => {
                     <input
                       type="text"
                       className="border-b border-gray-400 w-full px-3 focus-visible:outline-none focus-visible:border-b-2 focus-visible:border-black"
-                      value={values?.avatar?.name}
+                      value={values?.avatar?.name || ""}
                     />
                     <input
                       className="hidden"
                       type="file"
                       name="avatar"
                       id="avatar"
-                      onChange={(event) => {
-                        setFieldValue("avatar", event?.target?.files[0]);
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        const file = event.target.files
+                          ? event.target.files[0]
+                          : null;
+                        setFieldValue("avatar", file);
                       }}
                     />
                   </div>

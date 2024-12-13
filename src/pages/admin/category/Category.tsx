@@ -12,6 +12,12 @@ import CustomButton from "../../../components/ui/CustomButton";
 import { toast } from "sonner";
 import { TResponse } from "../../../types";
 
+export type TCategory = {
+  id: string;
+  name: string;
+  createdAt: string;
+};
+
 const Category = () => {
   const { data } = useGetAllCategoryQuery("");
   const categoryData = data?.data;
@@ -39,11 +45,11 @@ const Category = () => {
     }
   };
 
-  const handleDeleteCategory = async (values: FormikValues) => {
+  const handleDeleteCategory = async (values: { id: string }) => {
     const toastId = toast.loading("Category deleting please wait!");
     try {
       const res = (await deleteCategoryFunc({
-        id: values,
+        id: values.id,
       }).unwrap()) as TResponse;
       toast.success(res.message, { id: toastId, duration: 2000 });
     } catch (error) {
@@ -91,9 +97,9 @@ const Category = () => {
             </thead>
             {/* Table Body */}
             <tbody>
-              {categoryData?.map((item, index) => (
+              {categoryData?.map((item: TCategory) => (
                 <tr
-                  key={index}
+                  key={item?.id}
                   className="hover:bg-gray-50 bg-blue-gray-100 transition-colors duration-200"
                 >
                   {/* Name Column */}
@@ -113,7 +119,7 @@ const Category = () => {
                         Edit
                       </button>
                       <button
-                        onClick={() => handleDeleteCategory(item.id)}
+                        onClick={() => handleDeleteCategory({ id: item?.id })}
                         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition duration-200"
                       >
                         Delete

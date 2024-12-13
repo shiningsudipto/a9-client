@@ -7,7 +7,7 @@ import {
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
 import HandleShop from "./components/HandleShop";
-import { TResponse } from "../../types";
+import { TErrorResponse, TResponse } from "../../types";
 import { toast } from "sonner";
 import { FaRegEdit } from "react-icons/fa";
 import ProductTable from "./components/ProductTable";
@@ -60,8 +60,9 @@ const Shop = () => {
         toast.success(res.message, { id: toastId, duration: 2000 });
       }
     } catch (error) {
-      console.log(error);
-      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+      console.log("error", error);
+      const err = error as TErrorResponse;
+      toast.success(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
 
@@ -84,8 +85,9 @@ const Shop = () => {
         toast.success(res.message, { id: toastId, duration: 2000 });
       }
     } catch (error) {
-      console.log(error);
-      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+      console.log("error", error);
+      const err = error as TErrorResponse;
+      toast.success(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
 

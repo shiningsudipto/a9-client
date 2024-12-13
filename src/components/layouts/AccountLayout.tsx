@@ -128,7 +128,7 @@ const AccountLayout = () => {
           </div>
         </Drawer>
         <div className="w-[250px] h-screen bg-secondary-500 p-5">
-          {sidebarItems?.map((item, index) => {
+          {sidebarItems?.map((item) => {
             return (
               <Link to={item.path}>
                 <ListItem className="flex items-center gap-2 py-2 pr-4 text-white">

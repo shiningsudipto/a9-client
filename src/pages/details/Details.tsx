@@ -3,7 +3,6 @@ import {
   useGetProductByCategoryQuery,
   useGetProductDetailsQuery,
 } from "../../redux/features/product";
-import ReviewCard from "../../components/ui/ReviewCard";
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
 import { userRole } from "../../utils/constants.utils";
