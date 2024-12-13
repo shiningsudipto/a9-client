@@ -19,7 +19,6 @@ const Login = () => {
     const toastId = toast.loading("Login processing!");
     try {
       const res = (await login(values).unwrap()) as TResponse;
-      console.log({ res });
       if (res.success) {
         toast.success(res.message, { id: toastId, duration: 2000 });
         const user = verifyToken(res.data.token) as TUser;

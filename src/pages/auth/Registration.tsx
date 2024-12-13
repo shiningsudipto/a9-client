@@ -37,7 +37,6 @@ const Registration = () => {
       password: values.password,
       role: "VENDOR",
     };
-    console.log({ data });
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
     if (values.avatar) {
