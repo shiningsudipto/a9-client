@@ -42,6 +42,10 @@ const productApi = baseApi.injectEndpoints({
       query: () => `/product/flash-sale`,
       providesTags: ["Product"],
     }),
+    getProductsFromFollowingShops: builder.query({
+      query: (id) => `/product/from-following-shops/${id}`,
+      providesTags: ["Product", "Follow"],
+    }),
     getAllProducts: builder.query({
       query: (searchOptions) => {
         // console.log("Search Options:", searchOptions);
@@ -86,4 +90,5 @@ export const {
   useGetProductDetailsQuery,
   useGetAllProductsQuery,
   useGetProductByCategoryQuery,
+  useGetProductsFromFollowingShopsQuery,
 } = productApi;

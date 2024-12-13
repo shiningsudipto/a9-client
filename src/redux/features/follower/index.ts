@@ -14,7 +14,7 @@ const followApi = baseApi.injectEndpoints({
         method: "POST",
         body: productData,
       }),
-      invalidatesTags: ["Shop"],
+      invalidatesTags: ["Shop", "Follow"],
     }),
     toggleFollow: builder.mutation({
       query: (followData) => ({
@@ -22,7 +22,7 @@ const followApi = baseApi.injectEndpoints({
         method: "POST",
         body: followData,
       }),
-      invalidatesTags: ["User", "Shop"],
+      invalidatesTags: ["User", "Shop", "Follow"],
     }),
   }),
 });

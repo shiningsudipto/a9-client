@@ -1,4 +1,4 @@
-import { IoMdCart } from "react-icons/io";
+import { IoIosFlash, IoMdCart } from "react-icons/io";
 import { TProduct } from "../../types";
 import { Link } from "react-router-dom";
 import {
@@ -16,9 +16,11 @@ import { GrCompare } from "react-icons/gr";
 
 const ProductCard = ({
   products,
+  flashSale = false,
   cols = 4,
 }: {
   products: TProduct[];
+  flashSale?: boolean;
   cols?: number;
 }) => {
   const dispatch = useAppDispatch();
@@ -103,13 +105,16 @@ const ProductCard = ({
             return (
               <div
                 key={product?.id}
-                className="bg-white shadow-md rounded-lg overflow-hidden relative"
+                className="bg-white shadow-md relative rounded-lg overflow-hidden"
               >
                 <img
                   src={product?.images[0]}
                   alt={product?.name}
                   className="h-48 w-full object-cover"
                 />
+                {flashSale && (
+                  <IoIosFlash className="absolute top-1 text-3xl left-2 text-secondary" />
+                )}
                 <button
                   onClick={() => handleAddToComparison(product)}
                   className="absolute top-1 right-1 text-white bg-primary py-1 px-2 rounded-md"

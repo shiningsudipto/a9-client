@@ -18,8 +18,10 @@ import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 import { TbCurrencyTaka } from "react-icons/tb";
 import CustomButton from "./CustomButton";
 import { MdOutlineCancel } from "react-icons/md";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
 const CustomDrawer = () => {
   const { products, totalCost } = useAppSelector(useCartOptions);
+  const user = useAppSelector(useCurrentUser) as TUser;
   const dispatch = useAppDispatch();
   const [openRight, setOpenRight] = useState(false);
   const navigate = useNavigate();
@@ -102,6 +104,7 @@ const CustomDrawer = () => {
             </span>
           </p>
           <CustomButton
+            disabled={!user}
             label="Checkout"
             variant="filled"
             onclick={handleCheckout}

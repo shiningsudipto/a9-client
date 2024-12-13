@@ -32,6 +32,10 @@ const CustomNavbar = () => {
       name: "Products",
     },
     {
+      path: "/flash-sale",
+      name: "Flash Sale",
+    },
+    {
       path: `/${user?.role}/account`,
       name: "Account",
       secure: true,

@@ -3,9 +3,13 @@ import Banner from "./components/Banner";
 import CategorySection from "./components/CategorySection";
 import FlashSale from "./components/FlashSale";
 import { IoIosArrowUp } from "react-icons/io";
+import FollowingProducts from "./components/FollowingProducts";
+import { useAppSelector } from "../../redux/hooks";
+import { TUser, useCurrentUser } from "../../redux/slices/auth";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const user = useAppSelector(useCurrentUser) as TUser;
 
   // Show button when scrolled down
   const toggleVisibility = () => {
@@ -48,6 +52,7 @@ const Home = () => {
       <Banner />
       <FlashSale />
       <CategorySection />
+      {user && <FollowingProducts />}
     </div>
   );
 };
