@@ -121,3 +121,16 @@ export interface TCategory {
   name: string;
   createdAt: string;
 }
+
+export interface TUserDB {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  avatar: string;
+  role: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -1,4 +1,4 @@
-import { TProduct } from ".";
+import { TProduct, TUserDB } from ".";
 
 export interface TUserReview {
   id: string;
@@ -20,4 +20,15 @@ export interface TOrderItem {
   price: number;
   reviewed: boolean;
   product: TProduct;
+}
+
+export interface TOrder {
+  id: string;
+  userId: string;
+  shopId: string;
+  total: number;
+  status: string;
+  transactionId: string;
+  createdAt: string;
+  user: TUserDB;
 }

@@ -31,6 +31,10 @@ const adminRoutes = [
     name: "Shop",
   },
   {
+    path: "order-history",
+    name: "Order History",
+  },
+  {
     path: "/",
     name: "Home",
   },

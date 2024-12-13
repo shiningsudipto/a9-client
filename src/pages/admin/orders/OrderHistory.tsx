@@ -1,15 +1,12 @@
-import CustomTable from "../../../components/ui/CustomTable";
-import { useGetOrderByVendorIdQuery } from "../../../redux/features/order";
-import { useAppSelector } from "../../../redux/hooks";
-import { TUser, useCurrentUser } from "../../../redux/slices/auth";
 import { format } from "date-fns";
+import CustomTable from "../../../components/ui/CustomTable";
+import { useGetAllOrderQuery } from "../../../redux/features/order";
 import { TOrder } from "../../../types/order.type";
 
 const tableHead = ["User", "Email", "Price", "Date", "TNX-ID"];
 
-const Orders = () => {
-  const user = useAppSelector(useCurrentUser) as TUser;
-  const { data } = useGetOrderByVendorIdQuery(user?.id);
+const OrderHistory = () => {
+  const { data } = useGetAllOrderQuery("");
   const orderHistory = data?.data as TOrder[];
   return (
     <div>
@@ -32,4 +29,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default OrderHistory;

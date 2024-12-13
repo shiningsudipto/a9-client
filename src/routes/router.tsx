@@ -23,6 +23,7 @@ import Checkout from "../pages/checkout/Checkout";
 import PrivateRoute from "./PrivateRoute";
 import UserOrders from "../pages/user/orders/UserOrders";
 import UserReviews from "../pages/user/reviews/UserReviews";
+import OrderHistory from "../pages/admin/orders/OrderHistory";
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const router = createBrowserRouter([
       {
         path: "users",
         element: <User />,
+      },
+      {
+        path: "order-history",
+        element: <OrderHistory />,
       },
       {
         path: "shop",
