@@ -59,6 +59,25 @@ const vendorRoutes = [
   },
 ];
 
+const userRoutes = [
+  {
+    path: "account",
+    name: "Account",
+  },
+  {
+    path: "orders",
+    name: "Order History",
+  },
+  {
+    path: "reviews",
+    name: "Reviews",
+  },
+  {
+    path: "/",
+    name: "Home",
+  },
+];
+
 const AccountLayout = () => {
   const [open, setOpen] = useState(false);
   const user = useAppSelector(useCurrentUser) as TUser;
@@ -70,6 +89,9 @@ const AccountLayout = () => {
       break;
     case userRole.VENDOR:
       sidebarItems = vendorRoutes;
+      break;
+    case userRole.USER:
+      sidebarItems = userRoutes;
       break;
 
     default:

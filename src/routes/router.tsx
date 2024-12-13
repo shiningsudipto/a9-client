@@ -21,6 +21,8 @@ import ForgetPassword from "../pages/auth/ForgetPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import Checkout from "../pages/checkout/Checkout";
 import PrivateRoute from "./PrivateRoute";
+import UserOrders from "../pages/user/orders/UserOrders";
+import UserReviews from "../pages/user/reviews/UserReviews";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +96,14 @@ const router = createBrowserRouter([
       {
         path: "account",
         element: <Account />,
+      },
+      {
+        path: "orders",
+        element: <UserOrders />,
+      },
+      {
+        path: "reviews",
+        element: <UserReviews />,
       },
     ],
   },
