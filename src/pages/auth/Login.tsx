@@ -3,7 +3,7 @@ import { Form, Formik, FormikValues } from "formik";
 import FormikInput from "../../components/formik/FormikInput";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../redux/features/auth";
-import { TResponse } from "../../types";
+import { TErrorResponse, TResponse } from "../../types";
 import { toast } from "sonner";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser, TUser } from "../../redux/slices/auth";
@@ -32,8 +32,9 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error);
-      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
   return (
@@ -61,6 +62,15 @@ const Login = () => {
                   className="text-blue-500 font-semibold"
                 >
                   register!
+                </Link>
+              </p>
+              <p>
+                Forget password?{" "}
+                <Link
+                  to="/forget-password"
+                  className="text-blue-500 font-semibold"
+                >
+                  Reset now
                 </Link>
               </p>
             </div>

@@ -10,7 +10,7 @@ import {
   TabPanel,
 } from "@material-tailwind/react";
 import { useRegistrationMutation } from "../../redux/features/auth";
-import { TResponse } from "../../types";
+import { TErrorResponse, TResponse } from "../../types";
 import { toast } from "sonner";
 
 const customerInitialValues = {
@@ -51,8 +51,9 @@ const Registration = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
-      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
   const handleCustomerSubmit = async (values: FormikValues) => {
@@ -76,8 +77,9 @@ const Registration = () => {
         navigate("/login");
       }
     } catch (error) {
-      console.log(error);
-      toast.success(error?.data?.message, { id: toastId, duration: 2000 });
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
   const customer = (
