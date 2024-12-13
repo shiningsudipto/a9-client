@@ -22,6 +22,13 @@ const couponApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Coupon"],
     }),
+    createOrder: builder.mutation({
+      query: (orderData) => ({
+        url: "/order",
+        method: "POST",
+        body: orderData,
+      }),
+    }),
   }),
 });
 
@@ -29,4 +36,5 @@ export const {
   useCreateCouponMutation,
   useMatchCouponMutation,
   useGetAllCouponQuery,
+  useCreateOrderMutation,
 } = couponApi;

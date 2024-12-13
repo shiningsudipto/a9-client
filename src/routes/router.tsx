@@ -20,6 +20,7 @@ import Comparison from "../pages/comparison/Comparison";
 import ForgetPassword from "../pages/auth/ForgetPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 import Checkout from "../pages/checkout/Checkout";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,11 @@ const router = createBrowserRouter([
   },
   {
     path: "vendor",
-    element: <AccountLayout />,
+    element: (
+      <PrivateRoute>
+        <AccountLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "account",
@@ -129,6 +134,10 @@ const router = createBrowserRouter([
   {
     path: "reset-password",
     element: <ResetPassword />,
+  },
+  {
+    path: "*",
+    element: <p>Page not found!</p>,
   },
 ]);
 

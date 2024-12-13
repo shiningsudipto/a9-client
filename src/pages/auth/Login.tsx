@@ -23,6 +23,7 @@ const Login = () => {
       if (res.success) {
         toast.success(res.message, { id: toastId, duration: 2000 });
         const user = verifyToken(res.data.token) as TUser;
+        console.log({ user });
         dispatch(setUser({ user: user, token: res.data.token }));
         if (user.role === userRole.VENDOR) {
           navigate("/vendor/shop");
