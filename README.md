@@ -2,7 +2,21 @@
 
 ## Live URL
 
-[Visit the live site](https://electro-hub-bd.netlify.app)
+### [Visit the live site](https://electro-hub-bd.netlify.app)
+
+### Admin
+
+```
+email: electrohub@info.com
+pass: 123456
+```
+
+### Vendor
+
+```
+email: vendor2@gmail.com
+pass: 123456
+```
 
 ## Project Overview
 
