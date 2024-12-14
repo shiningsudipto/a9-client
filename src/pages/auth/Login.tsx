@@ -40,8 +40,8 @@ const Login = () => {
     <div>
       <Formik
         initialValues={{
-          email: "johndoe@example.com",
-          password: "hashedpassword123",
+          email: "electrohub@info.com",
+          password: "123456",
         }}
         onSubmit={handleSubmit}
       >

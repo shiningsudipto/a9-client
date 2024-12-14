@@ -17,6 +17,7 @@ import FormikInput from "../../components/formik/FormikInput";
 import ImgUpload from "../../components/formik/ImgUpload";
 import CustomButton from "../../components/ui/CustomButton";
 import { useState } from "react";
+import Pagination from "../../components/ui/Pagination";
 
 const initialValues = {
   name: "",
@@ -32,8 +33,12 @@ const Shop = () => {
   const [updateShopFunc] = useUpdateShopMutation();
   const [isUpdateShopModalOpen, setUpdateShopModalOpen] = useState(false);
 
-  const shopData = data?.data;
+  const shopData = data?.data?.shop;
   const [createShop] = useCreateShopMutation();
+
+  const handlePageChange = (newPage: number) => {
+    console.log(newPage);
+  };
 
   const initialValuesOfShopUpdate = {
     id: shopData?.id,
@@ -106,7 +111,7 @@ const Shop = () => {
         <>
           <div>
             <div>
-              <div className="w-[500px] p-5 bg-white rounded-md mx-auto relative mt-10">
+              <div className="lg:w-[500px] p-5 bg-white rounded-md lg:mx-auto relative lg:mt-10 mt-5 mx-5">
                 <div className="flex flex-col items-center space-y-2">
                   <img
                     src={shopData?.logo}
@@ -118,7 +123,7 @@ const Shop = () => {
                     {shopData?.description}
                   </p>
                 </div>
-                <div className="flex items-start justify-between mt-5">
+                <div className="flex lg:flex-row flex-col lg:items-start items-center lg:justify-between justify-center mt-5">
                   <p>{shopData?.Product?.length} Products</p>
                   <p>{shopData?.Order?.length} Order</p>
                   <p>{shopData?.Follower?.length} Followers</p>
@@ -138,6 +143,15 @@ const Shop = () => {
               </div>
             </div>
             <ProductTable TABLE_ROWS={shopData?.Product} />
+            {data?.data?.meta?.page > 1 && (
+              <div className="flex justify-end py-5 m-5">
+                <Pagination
+                  active={1}
+                  totalPages={1}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
           </div>
           <CustomModal
             open={isUpdateShopModalOpen}

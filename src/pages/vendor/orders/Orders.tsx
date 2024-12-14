@@ -16,13 +16,15 @@ const Orders = () => {
     id: user?.id,
     page: currentPage,
   });
-  const orderHistory = data?.data as TOrder[];
+  const orderHistory = data?.data?.data as TOrder[];
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
+  console.log(data);
+
   return (
-    <div>
+    <div className="min-h-screen">
       <CustomTable tableHead={tableHead} label="Order History">
         {orderHistory?.map((item) => {
           return (
@@ -39,10 +41,10 @@ const Orders = () => {
         })}
       </CustomTable>
       {data?.data?.meta?.page > 1 && (
-        <div className="flex justify-end py-5">
+        <div className="flex justify-end py-5 m-5">
           <Pagination
             active={currentPage}
-            totalPages={data?.data?.meta?.totalPages}
+            totalPages={data?.data?.meta?.page}
             onPageChange={handlePageChange}
           />
         </div>

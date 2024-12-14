@@ -22,7 +22,7 @@ const Pagination: React.FC<PaginationProps> = ({
     pages.push(
       <button
         key={i}
-        className={`rounded-none ${
+        className={`rounded-md p-2 font-bold ${
           active === i ? "bg-green-500 text-white" : "bg-transparent"
         }`}
         onClick={() => onPageChange(i)}
@@ -66,7 +66,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>,
       <button
         key={totalPages}
-        className={`rounded-none ${
+        className={`${
           active === totalPages ? "bg-green-500 text-white" : "bg-transparent"
         }`}
         onClick={() => onPageChange(totalPages)}
@@ -79,7 +79,7 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="flex items-center gap-4">
       <button
-        className="flex items-center gap-2 rounded-none bg-gray-100 text-gray-700"
+        className="flex items-center gap-2 bg-secondary text-white font-semibold py-2 px-6 rounded-md"
         onClick={() => onPageChange(active - 1)}
         disabled={active === 1}
       >
@@ -87,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>
       <div className="flex items-center gap-2">{pages}</div>
       <button
-        className="flex items-center gap-2 rounded-none bg-gray-100 text-gray-700"
+        className="flex items-center gap-2 bg-secondary text-white font-semibold py-2 px-6 rounded-md"
         onClick={() => onPageChange(active + 1)}
         disabled={active === totalPages}
       >

@@ -28,7 +28,10 @@ const Reviews = () => {
     }
   };
   return (
-    <main className="m-5">
+    <main className="m-5 min-h-screen">
+      {reviewsData?.length === 0 && (
+        <h1 className="text-2xl font-bol ">No reviews yet</h1>
+      )}
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         {reviewsData?.map((item) => {
           return (

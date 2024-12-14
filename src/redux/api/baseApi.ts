@@ -3,8 +3,8 @@ import { RootState } from "../store";
 const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://electro-hub-one.vercel.app/api",
-    // baseUrl: "http://localhost:3000/api",
+    // baseUrl: "https://electro-hub-one.vercel.app/api",
+    baseUrl: "http://localhost:3000/api",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).auth.token;

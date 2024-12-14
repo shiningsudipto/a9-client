@@ -11,19 +11,23 @@ const OrderHistory = () => {
   return (
     <div>
       <CustomTable tableHead={tableHead} label="Order History">
-        {orderHistory?.map((item) => {
-          return (
-            <tr key={item?.id}>
-              <td className="px-5 py-3 border">{item.user.name}</td>
-              <td className="px-5 py-3 border">{item.user.email}</td>
-              <td className="px-5 py-3 border">{item?.total}</td>
-              <td className="px-5 py-3 border ">
-                {format(new Date(item?.createdAt), "dd-MM-yyyy, HH:mm")}
-              </td>
-              <td className="px-5 py-3 border">{item?.transactionId}</td>
-            </tr>
-          );
-        })}
+        {orderHistory?.length === 0 ? (
+          <p>No order yet</p>
+        ) : (
+          orderHistory?.map((item) => {
+            return (
+              <tr key={item?.id}>
+                <td className="px-5 py-3 border">{item.user.name}</td>
+                <td className="px-5 py-3 border">{item.user.email}</td>
+                <td className="px-5 py-3 border">{item?.total}</td>
+                <td className="px-5 py-3 border ">
+                  {format(new Date(item?.createdAt), "dd-MM-yyyy, HH:mm")}
+                </td>
+                <td className="px-5 py-3 border">{item?.transactionId}</td>
+              </tr>
+            );
+          })
+        )}
       </CustomTable>
     </div>
   );

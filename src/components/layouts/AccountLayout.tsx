@@ -109,9 +109,12 @@ const AccountLayout = () => {
     <div className="">
       <div className="flex fixed top-0 w-full">
         {/* drawer */}
-        <Button onClick={openDrawer} className="lg:hidden block">
-          <FiMenu />
-        </Button>
+        <button
+          onClick={openDrawer}
+          className="lg:hidden w-10 h-10 flex justify-center"
+        >
+          <FiMenu className="mt-5" />
+        </button>
         <Drawer
           open={open}
           onClose={closeDrawer}
@@ -120,14 +123,25 @@ const AccountLayout = () => {
         >
           <div className="mb-6 flex items-center justify-between">
             <Typography variant="h5" color="blue-gray">
-              Material Tailwind
+              Dashboard Menu
             </Typography>
             <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
               <RxCross2 />
             </IconButton>
           </div>
+          <div>
+            {sidebarItems?.map((item) => {
+              return (
+                <Link to={item.path}>
+                  <ListItem className="flex items-center gap-2 py-2 pr-4 text-black">
+                    {item.name}
+                  </ListItem>
+                </Link>
+              );
+            })}
+          </div>
         </Drawer>
-        <div className="w-[250px] h-screen bg-secondary-500 p-5">
+        <div className="lg:block hidden w-[250px] h-screen bg-secondary-500 p-5">
           {sidebarItems?.map((item) => {
             return (
               <Link to={item.path}>

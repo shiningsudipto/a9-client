@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 const Account = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
-  const { data } = useGetUserByIdQuery(user.id);
+  const { data, isLoading } = useGetUserByIdQuery(user.id);
   const userData = data?.data;
   const [updateProfile] = useUpdateUserMutation();
   const initialValues = {
@@ -47,9 +47,14 @@ const Account = () => {
     }
   };
   const [isUpdateUserModalOpen, setUpdateUserModalOpen] = useState(false);
+
+  if (isLoading) {
+    return <p>Profile data fetching please wait</p>;
+  }
+
   return (
     <>
-      <div className="w-[500px] relative p-5 bg-white rounded-md mx-auto mt-10">
+      <div className=" lg:w-[500px] relative p-5 m-5 bg-white rounded-md lg:mx-auto mt-10">
         <div className="flex flex-col items-center space-y-2">
           <img
             src={userData?.avatar}
