@@ -31,7 +31,10 @@ const Banner = () => {
       >
         {promotionalOffers.map((item, index) => {
           return (
-            <div key={index} className="relative h-[80vh] w-full z-0">
+            <div
+              key={index}
+              className="relative lg:h-[80vh] h-[40vh] w-full z-0"
+            >
               <img
                 src={item.img}
                 alt="image 1"
@@ -39,8 +42,12 @@ const Banner = () => {
               />
               <div className="absolute inset-0 grid h-full w-full bg-black/35">
                 <div className="flex flex-col items-center justify-center text-white">
-                  <h2 className="text-6xl font-bold">{item.title}</h2>
-                  <h4 className="text-4xl font-semibold">{item.subtitle}</h4>
+                  <h2 className="lg:text-6xl text-3xl font-bold">
+                    {item.title}
+                  </h2>
+                  <h4 className="lg:text-4xl text-2xl lg:text-start text-center font-semibold">
+                    {item.subtitle}
+                  </h4>
                   <div className="mt-5">
                     <SearchProducts />
                   </div>

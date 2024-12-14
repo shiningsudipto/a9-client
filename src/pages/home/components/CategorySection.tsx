@@ -18,7 +18,7 @@ const CategorySection = () => {
       <div className="mb-5">
         <h2 className="text-3xl font-bold">Categories</h2>
       </div>
-      <div className="grid grid-cols-6 gap-5">
+      <div className="grid lg:grid-cols-6 grid-cols-2 gap-5">
         {categoryData?.map((item) => {
           return (
             <button

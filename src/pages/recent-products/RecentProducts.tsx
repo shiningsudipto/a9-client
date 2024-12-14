@@ -1,15 +1,7 @@
 import ProductCard from "../../components/ui/ProductCard";
-import { useAppSelector } from "../../redux/hooks";
-import { TUser, useCurrentUser } from "../../redux/slices/auth";
-import { userRole } from "../../utils/constants.utils";
 import { getFromLocalstorage } from "../../utils/localstorage.utils";
 
 const RecentProducts = () => {
-  const user = useAppSelector(useCurrentUser) as TUser;
-  if (user?.role !== userRole?.USER && user?.role !== null) {
-    return <p>This page is only for logged in customer!</p>;
-  }
-
   const products = getFromLocalstorage("recentProducts");
 
   return (

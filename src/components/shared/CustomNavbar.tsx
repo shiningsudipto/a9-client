@@ -16,6 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setUser, TUser, useCurrentUser } from "../../redux/slices/auth";
+import { removeFromLocalstorage } from "../../utils/localstorage.utils";
 
 const CustomNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -71,6 +72,7 @@ const CustomNavbar = () => {
 
   const handleLogout = () => {
     dispatch(setUser({ user: null, token: null }));
+    removeFromLocalstorage("recentProducts");
   };
 
   useEffect(() => {

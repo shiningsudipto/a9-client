@@ -44,8 +44,8 @@ const Products = () => {
   };
 
   return (
-    <div className="section-gap-xy grid gap-10 grid-cols-4">
-      <div className="bg-gray-50">
+    <div className="section-gap-xy grid gap-10 lg:grid-cols-4 grid-cols-1">
+      <div className="bg-gray-50 p-4 rounded-md">
         <SearchProducts />
         <div className="mt-5">
           <p className="text-xl font-bold mb-4">Categories:</p>
@@ -100,7 +100,7 @@ const Products = () => {
           </div>
         </div>
       </div>
-      <div className="col-span-3">
+      <div className="lg:col-span-3 lg:mt-0 mt-5">
         <ProductCard products={allProducts} cols={3} />
       </div>
     </div>

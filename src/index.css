@@ -8,8 +8,8 @@ html {
 }
 
 .section-gap-x {
-  @apply px-20;
+  @apply lg:px-20 px-4;
 }
 .section-gap-xy {
-  @apply px-20 py-10;
+  @apply lg:px-20 lg:py-10 px-4 py-5;
 }

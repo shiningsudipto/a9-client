@@ -43,8 +43,10 @@ const ShopDetails = () => {
           className="w-32 h-32 object-cover rounded-full border border-gray-300"
         />
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-primary-500">{shop?.name}</h1>
-          <p className="text-gray-600 mt-2">{shop?.description}</p>
+          <h1 className="text-3xl font-bold text-primary-500 text-center">
+            {shop?.name}
+          </h1>
+          <p className="text-gray-600 mt-2 text-center">{shop?.description}</p>
           <div className="mt-4 flex items-center gap-6">
             <button
               onClick={() => handleToggleFollow()}
