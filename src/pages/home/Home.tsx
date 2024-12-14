@@ -6,6 +6,7 @@ import { IoIosArrowUp } from "react-icons/io";
 import FollowingProducts from "./components/FollowingProducts";
 import { useAppSelector } from "../../redux/hooks";
 import { TUser, useCurrentUser } from "../../redux/slices/auth";
+import AllProducts from "./components/AllProducts";
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,6 +51,7 @@ const Home = () => {
       )}
       {/* Page Content */}
       <Banner />
+      <AllProducts />
       <FlashSale />
       <CategorySection />
       {user && <FollowingProducts />}
