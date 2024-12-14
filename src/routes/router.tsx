@@ -24,6 +24,7 @@ import PrivateRoute from "./PrivateRoute";
 import UserOrders from "../pages/user/orders/UserOrders";
 import UserReviews from "../pages/user/reviews/UserReviews";
 import OrderHistory from "../pages/admin/orders/OrderHistory";
+import Coupon from "../pages/vendor/coupon/Coupon";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <Reviews />,
+      },
+      {
+        path: "coupon",
+        element: <Coupon />,
       },
     ],
   },

@@ -134,3 +134,12 @@ export interface TUserDB {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface TCoupon {
+  id: string;
+  code: string;
+  discount: number;
+  expDate: string;
+  userId: string;
+  createdAt: string;
+}

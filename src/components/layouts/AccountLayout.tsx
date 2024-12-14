@@ -57,6 +57,10 @@ const vendorRoutes = [
     name: "Reviews",
   },
   {
+    path: "coupon",
+    name: "Coupon",
+  },
+  {
     path: "/",
     name: "Home",
   },
