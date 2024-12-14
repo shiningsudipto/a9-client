@@ -8,9 +8,10 @@ import ProductCard from "../../components/ui/ProductCard";
 import { useGetAllCategoryQuery } from "../../redux/features/category";
 import { transformItemsToValueAndLabel } from "../../utils";
 import { useAppDispatch } from "../../redux/hooks";
-import { Radio, Slider } from "@material-tailwind/react";
+import { Radio } from "@material-tailwind/react";
 import SearchProducts from "../../components/shared/SearchProducts";
 import { useEffect, useState } from "react";
+import { TProduct } from "../../types";
 
 const priceSortOptions = [
   {
@@ -25,19 +26,28 @@ const priceSortOptions = [
 
 const Products = () => {
   const searchOptions = useSelector(useSearchOptions);
-  // console.log(searchOptions);
   const { data } = useGetAllProductsQuery(searchOptions);
   const productsData = data?.data?.data;
+
+  // State for all products and max price filter
   const [allProducts, setProducts] = useState(productsData);
-  console.log({ allProducts });
+  const [maxPrice, setMaxPrice] = useState(40000);
+
   const { data: categoryData } = useGetAllCategoryQuery("");
   const allCategory = categoryData?.data;
   const categoryOptions = transformItemsToValueAndLabel(allCategory);
+
   const dispatch = useAppDispatch();
 
+  // Update product list whenever products data or max price changes
   useEffect(() => {
-    setProducts(productsData);
-  }, [data, productsData]);
+    if (productsData) {
+      const filteredProducts = productsData.filter(
+        (product: TProduct) => product.price <= maxPrice
+      );
+      setProducts(filteredProducts);
+    }
+  }, [productsData, maxPrice]);
 
   const setSearchValueToTheSlice = (name: string, value: string) => {
     dispatch(setSearchOptions({ [name]: value }));
@@ -95,8 +105,15 @@ const Products = () => {
           <p className="text-xl font-bold mb-4">Filter by Price:</p>
           <div className="flex items-center gap-4">
             <span className="text-gray-700">${0}</span>
-            <Slider defaultValue={50} />
-            <span className="text-gray-700">20</span>
+            <input
+              type="range"
+              min="100"
+              max="50000"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              id="myRange"
+            />
+            <span className="text-gray-700">{maxPrice}</span>
           </div>
         </div>
       </div>
