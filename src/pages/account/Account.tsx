@@ -1,5 +1,6 @@
 import { FaRegEdit } from "react-icons/fa";
 import {
+  useChangePassMutation,
   useGetUserByIdQuery,
   useUpdateUserMutation,
 } from "../../redux/features/auth";
@@ -12,12 +13,15 @@ import { Form, Formik, FormikValues } from "formik";
 import CustomButton from "../../components/ui/CustomButton";
 import ImgUpload from "../../components/formik/ImgUpload";
 import { toast } from "sonner";
+import FormikForm from "../../components/formik/FormikForm";
+import { TErrorResponse } from "../../types";
 
 const Account = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
   const { data, isLoading } = useGetUserByIdQuery(user.id);
   const userData = data?.data;
   const [updateProfile] = useUpdateUserMutation();
+  const [changePassFunc] = useChangePassMutation();
   const initialValues = {
     name: userData?.name,
     address: userData?.address,
@@ -43,10 +47,31 @@ const Account = () => {
       }).unwrap();
       toast.success(res.message, { id: toastId, duration: 2000 });
     } catch (error) {
-      console.log(error);
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
     }
   };
   const [isUpdateUserModalOpen, setUpdateUserModalOpen] = useState(false);
+  const [isUpdatePasswordModalOpen, setUpdatePasswordModalOpen] =
+    useState(false);
+
+  const handlePasswordChange = async (values: FormikValues) => {
+    setUpdatePasswordModalOpen(false);
+    const toastId = toast.loading("Password updating please wait!");
+    const data = {
+      email: user.email,
+      ...values,
+    };
+    try {
+      const res = await changePassFunc(data).unwrap();
+      toast.success(res.message, { id: toastId, duration: 2000 });
+    } catch (error) {
+      console.log("error:", error);
+      const err = error as TErrorResponse;
+      toast.error(err?.data?.message, { id: toastId, duration: 2000 });
+    }
+  };
 
   if (isLoading) {
     return <p>Profile data fetching please wait</p>;
@@ -74,6 +99,13 @@ const Account = () => {
         >
           <FaRegEdit />
           Edit
+        </button>
+        <button
+          onClick={() => setUpdatePasswordModalOpen(true)}
+          className="absolute top-5 right-2 flex items-center gap-2"
+        >
+          <FaRegEdit />
+          Change password
         </button>
       </div>
       <CustomModal
@@ -106,6 +138,21 @@ const Account = () => {
             );
           }}
         </Formik>
+      </CustomModal>
+      <CustomModal
+        open={isUpdatePasswordModalOpen}
+        setOpen={setUpdatePasswordModalOpen}
+        header={true}
+        title="Change Password"
+      >
+        <FormikForm
+          initialValues={{ oldPassword: "", newPassword: "" }}
+          onSubmit={handlePasswordChange}
+        >
+          <FormikInput name="oldPassword" label="Old Password" />
+          <FormikInput name="newPassword" label="New Password" />
+          <CustomButton label="Change" variant="filled" type="submit" />
+        </FormikForm>
       </CustomModal>
     </>
   );
