@@ -18,6 +18,13 @@ email: vendor2@gmail.com
 pass: 123456
 ```
 
+## Coupon
+
+```
+1/ BLACKFRIDAY5
+2/ BLACKFRIDAY10
+```
+
 ## Project Overview
 
 This is a frontend application for an e-commerce platform specializing in Electric accessories. Built using React, Redux Toolkit, and TypeScript, this platform offers a seamless shopping experience for users, including easy navigation, product management, and secure checkout options.
