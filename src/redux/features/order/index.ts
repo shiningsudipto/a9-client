@@ -13,7 +13,7 @@ const orderApi = baseApi.injectEndpoints({
       query: () => `/order`,
     }),
     getOrderByVendorId: builder.query({
-      query: (id) => `/order/shop-owner/${id}`,
+      query: ({ id, page }) => `/order/shop-owner/${id}?page=${page}&limit=10`,
     }),
     getOrderByUserId: builder.query({
       query: (id) => `/order/${id}`,

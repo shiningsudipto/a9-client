@@ -4,13 +4,23 @@ import { useAppSelector } from "../../../redux/hooks";
 import { TUser, useCurrentUser } from "../../../redux/slices/auth";
 import { format } from "date-fns";
 import { TOrder } from "../../../types/order.type";
+import { useState } from "react";
+import Pagination from "../../../components/ui/Pagination";
 
 const tableHead = ["User", "Email", "Price", "Date", "TNX-ID"];
 
 const Orders = () => {
   const user = useAppSelector(useCurrentUser) as TUser;
-  const { data } = useGetOrderByVendorIdQuery(user?.id);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useGetOrderByVendorIdQuery({
+    id: user?.id,
+    page: currentPage,
+  });
   const orderHistory = data?.data as TOrder[];
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <div>
       <CustomTable tableHead={tableHead} label="Order History">
@@ -28,6 +38,15 @@ const Orders = () => {
           );
         })}
       </CustomTable>
+      {data?.data?.meta?.page > 1 && (
+        <div className="flex justify-end py-5">
+          <Pagination
+            active={currentPage}
+            totalPages={data?.data?.meta?.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      )}
     </div>
   );
 };
