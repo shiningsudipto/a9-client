@@ -68,7 +68,7 @@ const productApi = baseApi.injectEndpoints({
         const queryString = params.toString();
         return `/product?${queryString}`;
       },
-      providesTags: ["Product"],
+      providesTags: ["Product", "Shop"],
     }),
     getProductDetails: builder.query({
       query: (id) => `/product/${id}`,

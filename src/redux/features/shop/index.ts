@@ -16,7 +16,7 @@ const shopApi = baseApi.injectEndpoints({
         method: "PUT",
         body: shopData,
       }),
-      invalidatesTags: ["Shop"],
+      invalidatesTags: ["Shop", "Product"],
     }),
     getShopByVendor: builder.query({
       query: (id) => `/shop/${id}`,
